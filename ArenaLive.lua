@@ -4,13 +4,20 @@ local addonName, L = ...;
 local ArenaLive = ArenaLive;
 
 --[[**
-  * Initializes the addon's base frame, setting script handlers and
-  * registering all necessary events.
+  * Initializes the addon, setting script handlers, registering
+  * necessary events and creating required class instances.
 ]]
 function ArenaLive:init()
   self:SetScript("OnEvent", self.onEvent);
   self:RegisterEvent("ADDON_LOADED");
+  self.UnitFrameManager = DeliUnitFrames.classes.UnitFrameManager:new();
 
+  local ufm = self.UnitFrameManager;
+  self.HealthBar = DeliUnitFrames.classes.HealthBar:new(ufm);
+  self.PowerBar = DeliUnitFrames.classes.PowerBar:new(ufm);
+  self.ClassIcon = DeliUnitFrames.classes.ClassIcon:new(ufm);
+  self.BuffFrame = DeliUnitFrames.classes.BuffFrame:new(ufm);
+  self.DebuffFrame = DeliUnitFrames.classes.DebuffFrame:new(ufm);
 end
 
 --[[**
@@ -37,6 +44,11 @@ function ArenaLive:onAddonLoaded()
   end
 
   self.db = ArenaLiveDB;
+
+  -- Create a test frame
+  local frame = self.UnitFrame:new("left", nil, "ArenaLiveTestFrame",
+    "ArenaLive", "player");
+  self.UnitFrameManager:addFrame(frame);
 end
 
 ArenaLive:init();
