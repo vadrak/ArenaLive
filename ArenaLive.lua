@@ -17,7 +17,7 @@ end
   * OnEvent script handler for ArenaLive.
   *
   * @param event (string) the name of the event that fired.
-  * @param ... (mixed) a arbitrary number of arguments accompanying
+  * @param ... (mixed) an arbitrary number of arguments accompanying
   * the event.
 ]]
 function ArenaLive:onEvent(event, ...)
