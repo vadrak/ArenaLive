@@ -1,0 +1,6 @@
+## Interface: 70105
+## Title: ArenaLive
+## Notes: A Spectator User Interface for World of Warcraft arenas.
+## Author: Vadrak
+
+bootstrap.xml
