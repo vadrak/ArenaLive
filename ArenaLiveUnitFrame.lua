@@ -1,5 +1,6 @@
 local UnitFrame = DeliUnitFrames:newClass("ArenaLiveUnitFrame",
   "AbstractUnitFrame");
+ArenaLive.UnitFrame = UnitFrame;
 
 --[[**
   * @Override
@@ -7,7 +8,7 @@ local UnitFrame = DeliUnitFrames:newClass("ArenaLiveUnitFrame",
   * @see AbstractUnitFrame
 ]]
 function UnitFrame:getDatabase()
-  return ArenaLive.db;
+  return ArenaLive.db.unitFrames;
 end
 
 --[[**
