@@ -5,5 +5,5 @@
   <Frame name="ArenaLive" setAllPoints="true"/>
 
   <Include File="lib/DeliUnitFrames/load.xml"/>
-  <Scropt File="ArenaLive.lua"/>
+  <Script File="ArenaLive.lua"/>
 </Ui>
