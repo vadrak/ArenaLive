@@ -32,6 +32,11 @@ end
   * the World of Warcraft client.
 ]]
 function ArenaLive:onAddonLoaded()
+  if (not ArenaLiveDB) then
+    ArenaLiveDB = {};
+  end
+
+  self.db = ArenaLiveDB;
 end
 
 ArenaLive:init();
