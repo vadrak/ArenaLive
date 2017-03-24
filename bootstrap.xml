@@ -4,7 +4,7 @@
 
   <Frame name="ArenaLive" setAllPoints="true"/>
 
-  <Include File="lib/DeliUnitFrames/load.xml"/>
+  <Include File="lib\DeliUnitFrames\load.xml"/>
   <Script File="ArenaLive.lua"/>
   <Script File="ArenaLiveUnitFrame.lua"/>
 </Ui>
