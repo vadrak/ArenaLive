@@ -1,4 +1,5 @@
-local UnitFrame = DeliUnitFrames:newClass("ArenaLiveUnitFrame");
+local UnitFrame = DeliUnitFrames:newClass("ArenaLiveUnitFrame",
+  "AbstractUnitFrame");
 
 --[[**
   * @Override
