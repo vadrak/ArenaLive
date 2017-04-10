@@ -10,5 +10,6 @@
 
   <Script File="defaults.lua"/>
   <Script File="ArenaLive.lua"/>
+  <Include File="ArenaLiveUnitFrameTemplate.xml"/>
   <Script File="ArenaLiveUnitFrame.lua"/>
 </Ui>

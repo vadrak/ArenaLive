@@ -47,7 +47,7 @@ function ArenaLive:onAddonLoaded()
 
   -- Create a test frame
   local frame = self.UnitFrame:new("left", nil, "ArenaLiveTestFrame",
-    self, "player");
+    self, "ArenaLiveUnitFrameTemplate", "target");
   self.UnitFrameManager:addFrame(frame);
   self.ClassIcon:addToFrame(frame);
   self.HealthBar:addToFrame(frame);
