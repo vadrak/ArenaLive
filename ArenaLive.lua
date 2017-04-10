@@ -40,15 +40,20 @@ end
 ]]
 function ArenaLive:onAddonLoaded()
   if (not ArenaLiveDB) then
-    ArenaLiveDB = {};
+    ArenaLiveDB = ArenaLive.defaults;
   end
 
   self.db = ArenaLiveDB;
 
   -- Create a test frame
   local frame = self.UnitFrame:new("left", nil, "ArenaLiveTestFrame",
-    "ArenaLive", "player");
+    self, "player");
   self.UnitFrameManager:addFrame(frame);
+  self.ClassIcon:addToFrame(frame);
+  self.HealthBar:addToFrame(frame);
+  self.PowerBar:addToFrame(frame);
+  self.BuffFrame:addToFrame(frame);
+  self.DebuffFrame:addToFrame(frame);
 end
 
 ArenaLive:init();

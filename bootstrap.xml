@@ -4,8 +4,11 @@
 
   <Frame name="ArenaLive" setAllPoints="true"/>
 
+  <!-- Libraries -->
   <Include File="lib\LibStub\LibStub.lua"/>
   <Include File="lib\DeliUnitFrames\load.xml"/>
+
+  <Script File="defaults.lua"/>
   <Script File="ArenaLive.lua"/>
   <Script File="ArenaLiveUnitFrame.lua"/>
 </Ui>
