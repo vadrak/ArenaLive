@@ -18,6 +18,7 @@ function ArenaLive:init()
   self.ClassIcon = DeliUnitFrames.classes.ClassIcon:new(ufm);
   self.BuffFrame = DeliUnitFrames.classes.BuffFrame:new(ufm);
   self.DebuffFrame = DeliUnitFrames.classes.DebuffFrame:new(ufm);
+  self.CastBar = DeliUnitFrames.classes.CastBar:new(ufm, nil);
 end
 
 --[[**
@@ -54,6 +55,7 @@ function ArenaLive:onAddonLoaded()
   self.PowerBar:addToFrame(frame);
   self.BuffFrame:addToFrame(frame);
   self.DebuffFrame:addToFrame(frame);
+  self.CastBar:addToFrame(frame);
 end
 
 ArenaLive:init();
