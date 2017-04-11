@@ -12,4 +12,5 @@
   <Script File="ArenaLive.lua"/>
   <Include File="ArenaLiveUnitFrameTemplate.xml"/>
   <Script File="ArenaLiveUnitFrame.lua"/>
+  <Include File="WarGameMenu.xml"/>
 </Ui>
