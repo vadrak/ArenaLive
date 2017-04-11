@@ -1,7 +1,7 @@
-assert(DeliUnitFrames, "ArenaLive requires DeliUnitFrames.");
-
 local addonName, L = ...;
 local ArenaLive = ArenaLive;
+
+assert(DeliUnitFrames, "ArenaLive requires DeliUnitFrames.");
 
 --[[**
   * Initializes the addon, setting script handlers, registering
