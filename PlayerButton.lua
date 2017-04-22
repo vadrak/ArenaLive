@@ -1,6 +1,5 @@
 local addonName, L = ...;
 ArenaLivePlayerButton = {};
-local mt = {__index = ArenaLivePlayerButton};
 local PlayerButton = ArenaLivePlayerButton;
 
 --[[**
@@ -11,7 +10,14 @@ local PlayerButton = ArenaLivePlayerButton;
   * initialized as a player button.
 ]]
 function PlayerButton:init(btn)
-  setmetatable(btn, mt);
+  --[[
+    * Meta tables would be way more elegant here, but since btn is an
+    * UI element, it already has a meta table associated with it, so
+    * we copy all methods of this class to btn instead.
+  ]]
+  for key, val in pairs(self) do
+    btn[key] = val;
+  end
   btn:SetScript("OnDragStart", btn.onDragStart);
 end
 
