@@ -19,6 +19,7 @@ function ArenaLive:init()
   self.BuffFrame = DeliUnitFrames.classes.BuffFrame:new(ufm);
   self.DebuffFrame = DeliUnitFrames.classes.DebuffFrame:new(ufm);
   self.CastBar = DeliUnitFrames.classes.CastBar:new(ufm, nil);
+  self.NameText = DeliUnitFrames.classes.NameText:new(ufm);
 end
 
 --[[**
@@ -46,6 +47,8 @@ function ArenaLive:onAddonLoaded()
 
   self.db = ArenaLiveDB;
 
+  ArenaLiveWarGameMenu:init();
+
   -- Create a test frame
   local frame = self.UnitFrame:new("left", nil, "ArenaLiveTestFrame",
     self, "ArenaLiveUnitFrameTemplate", "target");
@@ -56,6 +59,18 @@ function ArenaLive:onAddonLoaded()
   self.BuffFrame:addToFrame(frame);
   self.DebuffFrame:addToFrame(frame);
   self.CastBar:addToFrame(frame);
+  self.NameText:addToFrame(frame);
+  local nt = frame.components.NameText;
+  nt:SetParent(ArenaLiveTestFrameBorder:GetParent());
+end
+
+--[[**
+  * Returns ArenaLive's saved variables table.
+  *
+  * @return (table) ArenaLive's saved variable table.
+]]
+function ArenaLive:getDatabase()
+  return self.db;
 end
 
 ArenaLive:init();
