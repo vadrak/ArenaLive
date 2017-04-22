@@ -7,7 +7,7 @@ local SELECTED_MAP;
 local PLAYER_LIST = {};
 
 -- private functions:
-local updatePlayerData, getPlayerByBattleTag, arenaWarGameIterator
+local updatePlayerData, getPlayerByBattleTag, arenaWarGameIterator,
   updateTeamLeaderButton;
 
 function ArenaLiveWarGameMenu:init()
