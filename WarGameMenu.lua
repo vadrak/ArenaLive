@@ -88,19 +88,9 @@ function ArenaLiveWarGameMenuPlayerListScrollFrame:update()
     index = i + offset;
 
     if (index <= #PLAYER_LIST) then
-      local pInfo = PLAYER_LIST[index];
-      button.pId = pInfo.id;
-      button.name:SetText(pInfo.name);
-      button.info:SetText(pInfo.text);
-      button.icon:SetTexture(pInfo.texture);
-      if (pInfo.online) then
-        button.bg:SetColorTexture(0, 0.694, 0.941, 0.05);
-      else
-        button.bg:SetColorTexture(0.5, 0.5, 0.5, 0.05);
-      end
-      button:Show();
+      button:setPlayer(PLAYER_LIST[index]);
     else
-      button:Hide();
+      button:reset();
     end
   end
 

@@ -2,66 +2,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
 
-  <Button name="ArenaLivePlayerButtonTemplate" virtual="true">
-    <Size>
-      <AbsDimension x="189" y="32" />
-    </Size>
-    <Layers>
-      <Layer level="BACKGROUND">
-        <Texture name="$parentBackground" parentKey="bg">
-          <Anchors>
-            <Anchor point="TOPLEFT" x="0" y="0" />
-            <Anchor point="BOTTOMRIGHT" x="0" y="0" />
-          </Anchors>
-          <Color r="0" g="0.694" b="0.941" a="0.050" />
-        </Texture>
-      </Layer>
-      <Layer level="ARTWORK">
-        <Texture name="$parentIcon" parentKey="icon">
-          <Size>
-            <AbsDimension x="28" y="28" />
-          </Size>
-          <Anchors>
-            <Anchor point="TOPLEFT">
-              <Offset>
-                <AbsDimension x="2" y="-2" />
-              </Offset>
-            </Anchor>
-          </Anchors>
-        </Texture>
-        <FontString name="$parentNameText" parentKey="name"
-            inherits="FriendsFont_Normal" justifyH="LEFT">
-          <Size>
-            <AbsDimension x="157" y="12" />
-          </Size>
-          <Anchors>
-            <Anchor point="TOPLEFT">
-              <Offset>
-                <AbsDimension x="30" y="-4" />
-              </Offset>
-            </Anchor>
-          </Anchors>
-          <Color r="0.510" g="0.773" b="1" />
-        </FontString>
-        <FontString name="$parentInfoText" parentKey="info"
-          inherits="FriendsFont_Small" justifyH="LEFT">
-          <Size>
-            <AbsDimension x="120" y="10" />
-          </Size>
-          <Anchors>
-            <Anchor point="TOPLEFT" relativeTo="$parentNameText"
-                relativePoint="BOTTOMLEFT">
-              <Offset>
-                <AbsDimension x="0" y="-2" />
-              </Offset>
-            </Anchor>
-          </Anchors>
-          <Color r="0.486" g="0.518" b="0541" />
-        </FontString>
-      </Layer>
-    </Layers>
-  </Button>
-
   <Button name="ArenaLiveMapButtonTemplate" virtual="true">
     <Size>
       <AbsDimension x="309" y="40" />
@@ -410,5 +350,4 @@
   </Frame>
 
   <Script File="WarGameMenu.lua" />
-
 </Ui>

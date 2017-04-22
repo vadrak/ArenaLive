@@ -13,5 +13,6 @@
   <Script File="SlashCommands.lua" />
   <Include File="ArenaLiveUnitFrameTemplate.xml"/>
   <Script File="ArenaLiveUnitFrame.lua"/>
+  <Include File="PlayerButtonTemplate.xml" />
   <Include File="WarGameMenu.xml"/>
 </Ui>
