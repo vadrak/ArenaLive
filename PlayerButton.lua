@@ -26,7 +26,7 @@ end
 
 --[[**
   * Changes the appearance of this player button according to the
-  * player data in playerInfo, or hiding it, if playerInfo is nil.
+  * player data in pInfo, or hiding it, if playerInfo is nil.
   *
   * @param pInfo (table) a single player data entry from the war
   * game menu's PLAYER_LIST table.
