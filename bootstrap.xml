@@ -10,6 +10,7 @@
 
   <Script File="defaults.lua"/>
   <Script File="ArenaLive.lua"/>
+  <Script File="SlashCommands.lua" />
   <Include File="ArenaLiveUnitFrameTemplate.xml"/>
   <Script File="ArenaLiveUnitFrame.lua"/>
   <Include File="WarGameMenu.xml"/>
