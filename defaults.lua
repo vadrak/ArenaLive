@@ -1,4 +1,14 @@
 ArenaLive.defaults = {
+  teams = {
+    left = {
+      name = "Left Team",
+      score = 0,
+    },
+    right = {
+      name = "Right Team",
+      score = 0,
+    },
+  },
   unitFrames = {
     left = {
       enabled = true,
@@ -100,6 +110,19 @@ ArenaLive.defaults = {
           texture = "Interface\\TargetingFrame\\UI-StatusBar",
           font = "GameFontNormalSmall",
           hideTradeSkills = true,
+        },
+        NameText = {
+          enabled = true,
+          anchor = {
+            relativeTo = "UnitFrame",
+            point = "TOPLEFT",
+            relativePoint = "TOPLEFT",
+            x = 72,
+            y = -4,
+          },
+          width = 128,
+          height = 12,
+          font = "GameFontNormal",
         },
       },
     },
