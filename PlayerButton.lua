@@ -58,7 +58,7 @@ end
 function PlayerButton:reset()
   self.pID = nil;
   self.name:SetText("");
-  self.info:SetTexti("");
+  self.info:SetText("");
   self.icon:SetTexture();
   self:Hide();
 end
