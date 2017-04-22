@@ -1,10 +1,272 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
-  <Frame name="ArenaLiveWarGameMenu" inherits="PortraitFrameTemplate"
-      parent="UIParent">
+
+  <Button name="ArenaLivePlayerButtonTemplate" virtual="true">
     <Size>
-      <AbsDimension x="563" y="428" />
+      <AbsDimension x="189" y="32" />
+    </Size>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture name="$parentBackground" parentKey="bg">
+          <Anchors>
+            <Anchor point="TOPLEFT" x="0" y="0" />
+            <Anchor point="BOTTOMRIGHT" x="0" y="0" />
+          </Anchors>
+          <Color r="0" g="0.694" b="0.941" a="0.050" />
+        </Texture>
+      </Layer>
+      <Layer level="ARTWORK">
+        <Texture name="$parentIcon" parentKey="icon">
+          <Size>
+            <AbsDimension x="28" y="28" />
+          </Size>
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="2" y="-2" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </Texture>
+        <FontString name="$parentNameText" parentKey="name"
+            inherits="FriendsFont_Normal" justifyH="LEFT">
+          <Size>
+            <AbsDimension x="157" y="12" />
+          </Size>
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="30" y="-4" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <Color r="0.510" g="0.773" b="1" />
+        </FontString>
+        <FontString name="$parentInfoText" parentKey="info"
+          inherits="FriendsFont_Small" justifyH="LEFT">
+          <Size>
+            <AbsDimension x="120" y="10" />
+          </Size>
+          <Anchors>
+            <Anchor point="TOPLEFT" relativeTo="$parentNameText"
+                relativePoint="BOTTOMLEFT">
+              <Offset>
+                <AbsDimension x="0" y="-2" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <Color r="0.486" g="0.518" b="0541" />
+        </FontString>
+      </Layer>
+    </Layers>
+  </Button>
+
+  <Button name="ArenaLiveMapButtonTemplate" virtual="true">
+    <Size>
+      <AbsDimension x="309" y="40" />
+    </Size>
+    <Anchors>
+      <Anchor point="TOPRIGHT" />
+    </Anchors>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture parentKey="bg" file="Interface\PVPFrame\PvPMegaQueue"
+            alpha="0.6">
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="3" y="-1" />
+              </Offset>
+            </Anchor>
+            <Anchor point="BOTTOMRIGHT">
+              <Offset>
+                <AbsDimension x="-3" y="2" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <TexCoords left="0.00195313" right="0.63867188" top="0.83203125"
+              bottom="0.87109375"/>
+        </Texture>
+      </Layer>
+      <Layer level="ARTWORK">
+        <Texture name="$parentIcon" parentKey="icon">
+          <Size>
+            <AbsDimension x="32" y="32" />
+          </Size>
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="6" y="-3" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </Texture>
+        <FontString name="$parentNameText" parentKey="name"
+            inherits="GameFontNormal" justifyH="LEFT">
+          <Size>
+            <AbsDimension x="160" y="40" />
+          </Size>
+          <Anchors>
+            <Anchor point="LEFT">
+              <Offset>
+                <AbsDimension x="44" y="0" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </FontString>
+      </Layer>
+      <Layer level="BORDER">
+        <Texture name="$parentSelectedTexture" parentKey="selectedTexture"
+            file="Interface\PVPFrame\PvPMegaQueue" alphaMode="ADD"
+            hidden="true">
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="2" y="0" />
+              </Offset>
+            </Anchor>
+            <Anchor point="BOTTOMRIGHT">
+              <Offset>
+                <AbsDimension x="-2" y="1" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <TexCoords left="0.00195313" right="0.63867188" top="0.76953125"
+              bottom="0.83007813" />
+        </Texture>
+      </Layer>
+      <Layer level="OVERLAY">
+        <Texture name="$parentIconBorder" parentKey="iconBorder"
+            file="Interface\PVPFrame\SilverIconBorder">
+          <Size>
+            <AbsDimension x="48" y="48" />
+          </Size>
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="-2" y="5" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+    <HighlightTexture name="$parentHighlight" parentKey="highlight"
+      file="Interface\PVPFrame\PvPMegaQueue" alphaMode="ADD">
+      <Anchors>
+        <Anchor point="TOPLEFT">
+          <Offset>
+            <AbsDimension x="2" y="0" />
+          </Offset>
+        </Anchor>
+        <Anchor point="BOTTOMRIGHT">
+          <Offset>
+            <AbsDimension x="-2" y="1" />
+          </Offset>
+        </Anchor>
+      </Anchors>
+      <TexCoords left="0.00195313" right="0.63867188" top="0.70703125"
+          bottom="0.76757813"/>
+    </HighlightTexture>
+  </Button>
+
+  <Button name="ArenaLiveTeamLeaderButtonTemplate" virtual="true">
+    <Size>
+      <AbsDimension x="182" y="64" />
+    </Size>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture name="$parentButtonBackground" parentKey="btnBG"
+            file="Interface\Buttons\UI-EmptySlot">
+          <Size>
+            <AbsDimension x="57" y="57" />
+          </Size>
+          <Anchors>
+            <Anchor point="LEFT">
+              <Offset>
+                <AbsDimension x="0" y="-4" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </Texture>
+        <Texture name="$parentBackground" parentKey="bg">
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="48" y="-17" />
+              </Offset>
+            </Anchor>
+            <Anchor point="BOTTOMRIGHT">
+              <Offset>
+                <AbsDimension x="0" y="9" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <Color r="1" g="0" b="0" a="0.05" />
+        </Texture>
+      </Layer>
+      <Layer level="OVERLAY">
+        <FontString name="$parentTitle" inherits="GameFontNormal"
+          parentKey="title">
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="10" y="0" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </FontString>
+        <Texture name="$parentIcon" parentKey="icon">
+          <Size>
+            <AbsDimension x="37" y="37" />
+          </Size>
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="10" y="-17" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </Texture>
+        <FontString name="$parentNameText" inherits="FriendsFont_Normal"
+            justifyH="LEFT" parentKey="name">
+          <Size>
+            <AbsDimension x="120" y="12" />
+          </Size>
+          <Anchors>
+            <Anchor point="TOPLEFT" relativeTo="$parentIcon"
+                relativePoint="TOPRIGHT">
+              <Offset>
+                <AbsDimension x="5" y="-5" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <Color r="0.510" g="0.773" b="1" />
+        </FontString>
+        <FontString name="$parentInfoText" parentKey="info"
+          inherits="FriendsFont_Small" justifyH="LEFT">
+          <Size>
+            <AbsDimension x="120" y="10" />
+          </Size>
+          <Anchors>
+            <Anchor point="TOPLEFT" relativeTo="$parentNameText"
+                relativePoint="BOTTOMLEFT">
+              <Offset>
+                <AbsDimension x="0" y="-2" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <Color r="0.486" g="0.518" b="0.541" />
+        </FontString>
+      </Layer>
+    </Layers>
+  </Button>
+
+  <Frame name="ArenaLiveWarGameMenu" inherits="PortraitFrameTemplate"
+      parent="UIParent" hidden="true">
+    <Size>
+      <AbsDimension x="594" y="428" />
     </Size>
     <Anchors>
       <Anchor point="CENTER">
@@ -14,19 +276,123 @@
       </Anchor>
     </Anchors>
     <Frames>
-      <Frame name="$parentRightInset" useParentLevel="true"
+      <Frame name="$parentPlayerListInset" useParentLevel="true"
           inherits="InsetFrameTemplate">
         <Size>
-          <AbsDimension x="332" y="379" />
+          <AbsDimension x="214" y="378" />
         </Size>
         <Anchors>
-          <Anchor point="TOPRIGHT">
+          <Anchor point="TOPLEFT">
             <Offset>
-              <AbsDimension x="-5" y="-26" />
+              <AbsDimension x="1" y="-48" />
             </Offset>
           </Anchor>
         </Anchors>
       </Frame>
+      <Frame name="$parentMapInset" useParentLevel="true"
+          inherits="InsetFrameTemplate">
+        <Size>
+          <AbsDimension x="363" y="166" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset>
+              <AbsDimension x="-5" y="-48" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </Frame>
+      <ScrollFrame name="$parentPlayerListScrollFrame" parentKey="players"
+          inherits="HybridScrollFrameTemplate">
+        <Size>
+          <AbsDimension x="189" y="369" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentPlayerListInset">
+            <Offset>
+              <AbsDimension x="5" y="-5" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Frames>
+          <Slider name="$parentScrollBar" inherits="HybridScrollBarTemplate">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
+                <Offset>
+                  <AbsDimension x="0" y="-12" />
+                </Offset>
+              </Anchor>
+              <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT">
+                <Offset>
+                  <AbsDimension x="0" y="11" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </Slider>
+        </Frames>
+      </ScrollFrame>
+      <ScrollFrame name="$parentMapsScrollFrame" parentKey="maps"
+          inherits="HybridScrollFrameTemplate">
+        <Size>
+          <AbsDimension x="341" y="160" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentMapInset">
+            <Offset>
+              <AbsDimension x="0" y="-4" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Frames>
+          <Slider name="$parentScrollBar" inherits="HybridScrollBarTemplate">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
+                <Offset>
+                  <AbsDimension x="0" y="-12" />
+                </Offset>
+              </Anchor>
+              <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT">
+                <Offset>
+                  <AbsDimension x="0" y="11" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </Slider>
+        </Frames>
+      </ScrollFrame>
+      <Button name="$parentLeftTeamLeaderButton" parentKey="lLeadBtn"
+          inherits="ArenaLiveTeamLeaderButtonTemplate">
+        <Anchors>
+          <Anchor point="LEFT" relativeTo="$parentPlayerListInset"
+              relativePoint="RIGHT">
+            <Offset>
+              <AbsDimension x="2" y="-64" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </Button>
+      <Button name="$parentRightTeamLeaderButton" parentKey="rLeadBtn"
+          inherits="ArenaLiveTeamLeaderButtonTemplate">
+        <Anchors>
+          <Anchor point="LEFT" relativeTo="$parentLeftTeamLeaderButton"
+              relativePoint="RIGHT">
+            <Offset>
+              <AbsDimension x="5" y="0" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </Button>
+      <Button name="$parentTournamentModeCheckButton"
+          parentKey="tournModeButton" inherits="OptionsCheckButtonTemplate">
+        <Anchors>
+          <Anchor point="BOTTOMLEFT" relativeTo="$parentPlayerListInset"
+              relativePoint="BOTTOMRIGHT">
+            <Offset>
+              <AbsDimension x="3" y="-2" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </Button>
       <Button name="$parentStartButton" inherits="UIPanelButtonTemplate"
           text="START_WARGAME">
         <Size>
@@ -42,4 +408,7 @@
       </Button>
     </Frames>
   </Frame>
+
+  <Script File="WarGameMenu.lua" />
+
 </Ui>
