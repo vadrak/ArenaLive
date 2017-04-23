@@ -10,6 +10,9 @@ local PLAYER_LIST = {};
 local updatePlayerData, getPlayerByBattleTag, arenaWarGameIterator,
   updateTeamLeaderButton;
 
+--[[**
+  * Initializes ArenaLive's war game menu frame.
+]]
 function ArenaLiveWarGameMenu:init()
   SetPortraitToTexture(self.portrait, "Interface\\PVPFrame\\RandomPVPIcon");
   ArenaLiveWarGameMenuTitleText:SetText("Spectated War Games");
@@ -31,12 +34,21 @@ function ArenaLiveWarGameMenu:init()
   self:SetScript("OnEvent", self.onEvent);
 end
 
+--[[**
+  * OnShow callback of ArenaLive's war game menu.
+]]
 function ArenaLiveWarGameMenu:onShow()
   self:updatePlayerList();
   self:updateMapsList();
   self:updateTeamLeaderButtons();
 end
 
+--[[**
+  * OnEvent callback of ArenaLive's war game menu.
+  *
+  * @param event (string) the event's name that fired.
+  * @param ... (mixed) a number of arguments accompanying the event.
+]]
 function ArenaLiveWarGameMenu:onEvent(event, ...)
   if (event == "BN_FRIEND_INFO_CHANGED"
       or event == "BN_FRIEND_LIST_SIZE_CHANGED") then
@@ -63,6 +75,7 @@ function ArenaLiveWarGameMenu:updateMapsList()
     ArenaLiveWarGameMenuMapsScrollFrame:update();
   end
 end
+
 --[[**
   * Updates the war game menu's two leader buttons.
 ]]
