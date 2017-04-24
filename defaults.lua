@@ -1,10 +1,14 @@
 ArenaLive.defaults = {
+  map = nil,
+  tournamentMode = true,
   teams = {
     left = {
+      leader = nil,
       name = "Left Team",
       score = 0,
     },
     right = {
+      leader = nil,
       name = "Right Team",
       score = 0,
     },
