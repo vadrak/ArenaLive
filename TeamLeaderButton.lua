@@ -33,8 +33,8 @@ function TeamLeaderButton.setPlayer(btn, bTag)
     return;
   end
   btn.bTag = bTag;
-  btn.icon:SeTexture(pInfo.texture);
-  btn.name:SetTexture(pInfo.name);
+  btn.icon:SetTexture(pInfo.texture);
+  btn.name:SetText(pInfo.name);
   btn.name:SetTextColor(0, 1, 0, 1);
   btn.info:SetText(pInfo.text);
   btn.bg:SetColorTexture(0, 1, 0, 0.05);
