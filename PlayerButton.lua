@@ -16,8 +16,8 @@ function PlayerButton.init(btn)
 end
 
 --[[**
-  * Changes the appearance of this player button according to the
-  * player data in pInfo, or hiding it, if playerInfo is nil.
+  * Changes the appearance of btn according to the player data in
+  * pInfo, or hiding it, if playerInfo is nil.
   *
   * @param btn (PlayerButton) the player button which's player data
   * is going to be set.
