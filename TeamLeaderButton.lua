@@ -15,7 +15,6 @@ function TeamLeaderButton.init(btn)
   btn:RegisterForDrag("LeftButton");
 
   btn:SetScript("OnClick", onClick);
-  btn:SetScript("OnReceiveDrag", onReceiveDrag);
   btn:SetScript("OnDragStart", onDragStart);
 end
 
@@ -28,7 +27,7 @@ end
   * shown on the team leader button.
 ]]
 function TeamLeaderButton.setPlayer(btn, bTag)
-  local pInfo = ArenaLiveWarGameMenu:getPlayerByBattleTag(btag);
+  local pInfo = ArenaLiveWarGameMenu:getPlayerByBattleTag(bTag);
   if (not pInfo) then
     TeamLeaderButton.reset(btn);
     return;
@@ -59,13 +58,13 @@ end
 ]]
 onClick = function(self, button, down)
   local pInfo = ArenaLiveWarGameMenu:getCursorData();
+
   if (pInfo) then
     if (self.bTag) then
       ArenaLiveWarGameMenu:setCursorData(self.bTag);
     else
       ArenaLiveWarGameMenu:setCursorData(nil);
     end
-
     TeamLeaderButton.setPlayer(self, pInfo.bTag);
   end
 end
