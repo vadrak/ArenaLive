@@ -101,9 +101,9 @@ function ArenaLiveWarGameMenuPlayerListScrollFrame:update()
     index = i + offset;
 
     if (index <= #PLAYER_LIST) then
-      button:setPlayer(PLAYER_LIST[index]);
+      ArenaLivePlayerButton.setPlayer(button, PLAYER_LIST[index]);
     else
-      button:reset();
+      ArenaLivePlayerButton.reset(button);
     end
   end
 

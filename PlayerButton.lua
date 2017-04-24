@@ -1,6 +1,7 @@
 local addonName, L = ...;
 ArenaLivePlayerButton = {};
 local PlayerButton = ArenaLivePlayerButton;
+local onDragStart; -- private functions
 
 --[[**
   * Initializes a player button btn, essentially making it an object
@@ -9,16 +10,46 @@ local PlayerButton = ArenaLivePlayerButton;
   * btn (Button) reference to an UI button that is going to be
   * initialized as a player button.
 ]]
-function PlayerButton:init(btn)
-  --[[
-    * Meta tables would be way more elegant here, but since btn is an
-    * UI element, it already has a meta table associated with it, so
-    * we copy all methods of this class to btn instead.
-  ]]
-  for key, val in pairs(self) do
-    btn[key] = val;
+function PlayerButton.init(btn)
+  btn:SetScript("OnDragStart", onDragStart);
+end
+
+--[[**
+  * Changes the appearance of this player button according to the
+  * player data in pInfo, or hiding it, if playerInfo is nil.
+  *
+  * @param btn (PlayerButton) the player button which's player data
+  * is going to be set.
+  * @param pInfo (table) a single player data entry from the war
+  * game menu's PLAYER_LIST table.
+  * @see WarGameMenu.lua
+]]
+function PlayerButton.setPlayer(btn, pInfo)
+  btn.pID = pInfo.id;
+  btn.name:SetText(pInfo.name);
+  btn.info:SetText(pInfo.text);
+  btn.icon:SetTexture(pInfo.texture);
+  if (pInfo.online) then
+    btn.bg:SetColorTexture(0, 0.694, 0.941, 0.05);
+  else
+    btn.bg:SetColorTexture(0.5, 0.5, 0.5, 0.05);
   end
-  btn:SetScript("OnDragStart", btn.onDragStart);
+  btn:Show();
+end
+
+--[[**
+  * Resets the player button btn's player data, removing all texts,
+  * textures and hiding it.
+  *
+  * @param btn (PlayerButton) the player button object that is going
+  * to be reset.
+]]
+function PlayerButton.reset(btn)
+  btn.pID = nil;
+  btn.name:SetText("");
+  btn.info:SetText("");
+  btn.icon:SetTexture();
+  btn:Hide();
 end
 
 --[[**
@@ -27,38 +58,5 @@ end
   * @param button (string) mouse button that was used to click this
   * player button.
 ]]
-function PlayerButton:onDragStart(button)
-end
-
---[[**
-  * Changes the appearance of this player button according to the
-  * player data in pInfo, or hiding it, if playerInfo is nil.
-  *
-  * @param pInfo (table) a single player data entry from the war
-  * game menu's PLAYER_LIST table.
-  * @see WarGameMenu.lua
-]]
-function PlayerButton:setPlayer(pInfo)
-  self.pID = pInfo.id;
-  self.name:SetText(pInfo.name);
-  self.info:SetText(pInfo.text);
-  self.icon:SetTexture(pInfo.texture);
-  if (pInfo.online) then
-    self.bg:SetColorTexture(0, 0.694, 0.941, 0.05);
-  else
-    self.bg:SetColorTexture(0.5, 0.5, 0.5, 0.05);
-  end
-  self:Show();
-end
-
---[[**
-  * Resets this player button's player data, removing all texts,
-  * textures and hiding it.
-]]
-function PlayerButton:reset()
-  self.pID = nil;
-  self.name:SetText("");
-  self.info:SetText("");
-  self.icon:SetTexture();
-  self:Hide();
+onDragStart = function (btn)
 end

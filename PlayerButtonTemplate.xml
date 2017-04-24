@@ -64,7 +64,7 @@
     </Layers>
     <Scripts>
       <OnLoad>
-        ArenaLivePlayerButton:init(self);
+        ArenaLivePlayerButton.init(self);
       </OnLoad>
     </Scripts>
   </Button>
