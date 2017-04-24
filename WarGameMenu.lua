@@ -195,7 +195,7 @@ end
   * cursor currently holds.
 ]]
 function ArenaLiveWarGameMenu:getCursorData()
-  return CURRSOR_DATA;
+  return CURSOR_DATA;
 end
 
 --[[**
@@ -209,8 +209,10 @@ function ArenaLiveWarGameMenu:setCursorData(bTag)
   CURSOR_DATA = self:getPlayerByBattleTag(bTag);
   if (CURSOR_DATA) then
     SetCursor("Interface\\FriendsFrame\\Battlenet-Battleneticon");
+    PlaySound("INTERFACESOUND_CURSORGRABOBJECT");
   else
     ResetCursor();
+    PlaySound("INTERFACESOUND_CURSORDROPOBJECT");
   end
 end
 
