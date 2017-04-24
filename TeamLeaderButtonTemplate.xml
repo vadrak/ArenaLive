@@ -13,7 +13,7 @@
         <Texture name="$parentButtonBackground" parentKey="btnBG"
             file="Interface\Buttons\UI-EmptySlot">
           <Size>
-            <AbsDimension x="57" y="57" />
+            <AbsDimension x="52" y="52" />
           </Size>
           <Anchors>
             <Anchor point="LEFT">
@@ -57,7 +57,7 @@
           <Anchors>
             <Anchor point="TOPLEFT">
               <Offset>
-                <AbsDimension x="10" y="-17" />
+                <AbsDimension x="7" y="-17" />
               </Offset>
             </Anchor>
           </Anchors>
