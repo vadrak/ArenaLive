@@ -132,8 +132,8 @@
           </Anchor>
         </Anchors>
       </Button>
-      <Button name="$parentStartButton" inherits="UIPanelButtonTemplate"
-          text="START_WARGAME">
+      <Button name="$parentStartButton" parentKey="startBtn"
+          inherits="UIPanelButtonTemplate" text="START_WARGAME">
         <Size>
           <AbsDimension x="130" y="22" />
         </Size>
