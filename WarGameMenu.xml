@@ -121,7 +121,7 @@
           </Anchor>
         </Anchors>
       </Button>
-      <Button name="$parentTournamentModeCheckButton"
+      <CheckButton name="$parentTournamentModeCheckButton"
           parentKey="tournModeBtn" inherits="OptionsCheckButtonTemplate">
         <Anchors>
           <Anchor point="BOTTOMLEFT" relativeTo="$parentPlayerListInset"
@@ -131,7 +131,7 @@
             </Offset>
           </Anchor>
         </Anchors>
-      </Button>
+      </CheckButton>
       <Button name="$parentStartButton" parentKey="startBtn"
           inherits="UIPanelButtonTemplate" text="START_WARGAME">
         <Size>
