@@ -4,6 +4,7 @@ local PLAYER_BUTTON_HEIGHT = 32;
 
 -- private variables:
 local SELECTED_MAP;
+local CURSOR_DATA;
 local PLAYER_LIST = {};
 
 -- private functions:
@@ -183,6 +184,34 @@ function ArenaLiveWarGameMenu:getPlayerByBattleTag(bTag)
   end
 
   return nil;
+end
+
+--[[**
+  * Returns a reference to the player data table that the cursor
+  * currently holds or nil, if the cursor does not hold any data at
+  * the moment.
+  *
+  * @return (table) reference to the player data table that the
+  * cursor currently holds.
+]]
+function ArenaLiveWarGameMenu:getCursorData()
+  return CURRSOR_DATA;
+end
+
+--[[**
+  * Sets the cursor to hold the player data pointed to by bTag.
+  * To reset the cursor, call this function with nil as bTag.
+  *
+  * @param bTag (string) BattleTag of the player that the cursor
+  * should hold.
+]]
+function ArenaLiveWarGameMenu:setCursorData(bTag)
+  CURSOR_DATA = self:getPlayerByBattleTag(bTag);
+  if (CURSOR_DATA) then
+    SetCursor("Interface\\FriendsFrame\\Battlenet-Battleneticon");
+  else
+    ResetCursor();
+  end
 end
 
 --[[**
