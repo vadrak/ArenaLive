@@ -27,8 +27,8 @@ function ArenaLiveWarGameMenu:init()
   HybridScrollFrame_CreateButtons(self.players,
     "ArenaLivePlayerButtonTemplate", 0, -2);
 
-  ArenaLiveTeamLeaderButton.init(self.lLeadBtn);
-  ArenaLiveTeamLeaderButton.init(self.rLeadBtn);
+  ArenaLiveTeamLeaderButton.init(self.lLeadBtn, "left");
+  ArenaLiveTeamLeaderButton.init(self.rLeadBtn, "right");
 
   self:SetScript("OnShow", self.onShow);
   self:SetScript("OnEvent", self.onEvent);
@@ -118,7 +118,7 @@ end
 function ArenaLiveWarGameMenuMapsScrollFrame:update()
   local numWarGameTypes = GetNumWarGameTypes();
   local arenas = {};
-  for index, n, _, _, _, _, _, isRandom in arenaWarGameIterator, 0 do
+  for index, _, _, _, _, _, _, isRandom in arenaWarGameIterator, 0 do
     table.insert(arenas, index);
     if (not SELECTED_MAP and isRandom) then
       SELECTED_MAP = index;
@@ -160,6 +160,13 @@ end
 ]]
 function ArenaLiveWarGameMenu:setMap(id)
   SELECTED_MAP = id;
+  local db = ArenaLive:getDatabase();
+  local name, _, _, _, _, _, isRandom = GetWarGameTypeInfo(id);
+  if (isRandom) then
+    db.map = nil;
+  else
+    db.map = name;
+  end
   ArenaLiveWarGameMenuMapsScrollFrame:update();
 end
 
