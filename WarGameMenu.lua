@@ -133,23 +133,34 @@ function ArenaLiveWarGameMenuMapsScrollFrame:update()
     local button = buttons[i];
     local index = offset + i;
     if (index <= #arenas) then
-      local name, pvpType, _, _, _, _,
-        isRandom, texture = GetWarGameTypeInfo(arenas[index]);
-      button.name:SetText(name);
-      button.icon:SetTexture(texture);
-      if (arenas[index] == SELECTED_MAP) then
-        button.selectedTexture:Show();
-      else
-        button.selectedTexture:Hide();
-      end
-      button:Show();
+      ArenaLiveMapButton.setMap(button, arenas[index]);
     else
-      button:Hide();
+      ArenaLiveMapButton.reset(button);
     end
   end
 
   local totalHeight = #arenas * MAP_BUTTON_HEIGHT;
   HybridScrollFrame_Update(self, totalHeight, self:GetHeight());
+end
+
+--[[**
+  * Returns the currently selected map's id.
+  *
+  * @return (number) the current value of SELECTED_MAP.
+]]
+function ArenaLiveWarGameMenu:getMap()
+  return SELECTED_MAP;
+end
+
+--[[**
+  * Sets the currently selected map to id.
+  *
+  * @param id (number) the index of the map that should be selected,
+  * as forwarded to GetWarGameTypeInfo().
+]]
+function ArenaLiveWarGameMenu:setMap(id)
+  SELECTED_MAP = id;
+  ArenaLiveWarGameMenuMapsScrollFrame:update();
 end
 
 --[[**
