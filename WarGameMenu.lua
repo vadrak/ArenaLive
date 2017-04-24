@@ -8,16 +8,18 @@ local CURSOR_DATA;
 local PLAYER_LIST = {};
 
 -- private functions:
-local updatePlayerData, arenaWarGameIterator;
+local updatePlayerData, arenaWarGameIterator, tournMode_OnClick;
 
 --[[**
   * Initializes ArenaLive's war game menu frame.
 ]]
 function ArenaLiveWarGameMenu:init()
+  local db = ArenaLive:getDatabase();
+
   SetPortraitToTexture(self.portrait, "Interface\\PVPFrame\\RandomPVPIcon");
   ArenaLiveWarGameMenuTitleText:SetText("Spectated War Games");
 
-  local text = _G[self.tournModeButton:GetName() .. "Text"];
+  local text = _G[self.tournModeBtn:GetName() .. "Text"];
   text:SetText("Tournament Mode");
 
   self.players.scrollBar.doNotHide = true;
@@ -30,8 +32,11 @@ function ArenaLiveWarGameMenu:init()
   ArenaLiveTeamLeaderButton.init(self.lLeadBtn, "left");
   ArenaLiveTeamLeaderButton.init(self.rLeadBtn, "right");
 
+  self.tournModeBtn:SetChecked(db.tournamentMode)
+
   self:SetScript("OnShow", self.onShow);
   self:SetScript("OnEvent", self.onEvent);
+  self.startBtn:SetScript("OnClick", self.startWarGame);
 end
 
 --[[**
@@ -224,6 +229,21 @@ function ArenaLiveWarGameMenu:setCursorData(bTag)
 end
 
 --[[**
+  * Starts a spectated war game with the currently selected settings.
+]]
+function ArenaLiveWarGameMenu.startWarGame() 
+  local db = ArenaLive:getDatabase();
+  local l = ArenaLiveWarGameMenu:getPlayerByBattleTag(db.teams.left.leader);
+  local r = ArenaLiveWarGameMenu:getPlayerByBattleTag(db.teams.right.leader);
+  local tm = db.tournamentMode;
+  if (l and r) then
+    StartSpectatorWarGame(l.id, r.id, 3, db.map, tm);
+  else
+    print("Cannot start spectated war game, as at least one team leader has not yet been set.");
+  end
+end
+
+--[[**
   * Updates the table PLAYER_LIST to reflect the current status of
   * the player's Battle.net friend list.
 ]]
@@ -290,4 +310,19 @@ arenaWarGameIterator = function(start, last)
 
   -- No match
   return nil;
+end
+
+--[[**
+  * Tournament mode check button OnClick script callback.
+  *
+  * @param self (CheckButton) reference to the tournament mode check
+  * button.
+  * @param button (string) name of the mouse button responsible for
+  * the click.
+  * @param down (boolean) true, if the mouse button was clicked down,
+  * false otherwise.
+]]
+tournMode_OnClick = function(self, button, down)
+  local db = ArenaLive.getDatabase();
+  db.tournamentMode = ValueToBoolean(self:GetChecked());
 end
