@@ -3,12 +3,11 @@ local MAP_BUTTON_HEIGHT = 40;
 local PLAYER_BUTTON_HEIGHT = 32;
 
 -- private variables:
-local SELECTED_MAP; 
+local SELECTED_MAP;
 local PLAYER_LIST = {};
 
 -- private functions:
-local updatePlayerData, getPlayerByBattleTag, arenaWarGameIterator,
-  updateTeamLeaderButton;
+local updatePlayerData, arenaWarGameIterator;
 
 --[[**
   * Initializes ArenaLive's war game menu frame.
@@ -27,8 +26,8 @@ function ArenaLiveWarGameMenu:init()
   HybridScrollFrame_CreateButtons(self.players,
     "ArenaLivePlayerButtonTemplate", 0, -2);
 
-  self.lLeadBtn.title:SetText("Team Leader:");
-  self.rLeadBtn.title:SetText("Team Leader:");
+  ArenaLiveTeamLeaderButton.init(self.lLeadBtn);
+  ArenaLiveTeamLeaderButton.init(self.rLeadBtn);
 
   self:SetScript("OnShow", self.onShow);
   self:SetScript("OnEvent", self.onEvent);
@@ -82,8 +81,8 @@ end
 function ArenaLiveWarGameMenu:updateTeamLeaderButtons()
   if (self:IsShown()) then
     local db = ArenaLive:getDatabase();
-    updateTeamLeaderButton(self.lLeadBtn, db.teams.left);
-    updateTeamLeaderButton(self.rLeadBtn, db.teams.right);
+    ArenaLiveTeamLeaderButton.setPlayer(self.lLeadBtn, db.teams.left);
+    ArenaLiveTeamLeaderButton.setPlayer(self.rLeadBtn, db.teams.right);
   end
 end
 
@@ -164,6 +163,29 @@ function ArenaLiveWarGameMenu:setMap(id)
 end
 
 --[[**
+  * Returns Battle.net friend data of the player with the BattleTag
+  * btag, or nil, if no user with that BattleTag exists.
+  *
+  * @param bTag (string) the BattleTag of the player, whose
+  * Battle.net friend data should be returned.
+  * @return (table) the player's data table in PLAYER_LIST or nil, if
+  * no entry with bTag exists or bTag is nil.
+]]
+function ArenaLiveWarGameMenu:getPlayerByBattleTag(bTag)
+  if (not bTag) then
+    return nil;
+  end
+
+  for index, pInfo in pairs(PLAYER_LIST) do
+    if (pInfo.bTag == bTag) then
+      return pInfo;
+    end
+  end
+
+  return nil;
+end
+
+--[[**
   * Updates the table PLAYER_LIST to reflect the current status of
   * the player's Battle.net friend list.
 ]]
@@ -207,28 +229,6 @@ updatePlayerData = function()
 end
 
 --[[**
-  * Returns Battle.net friend data of the user with the BattleTag btag,
-  * or nil, if no user with that BattleTag exists.
-  *
-  * @param bTag (string) the BattleTag of the player, whose
-  * Battle.net friend data should be returned.
-  * @return (table) the player's data table in PLAYER_LIST.
-]]
-getPlayerByBattleTag = function(bTag)
-  if (not bTag) then
-    return nil;
-  end
-
-  for index, pInfo in pairs(PLAYER_LIST) do
-    if (pInfo.bTag == bTag) then
-      return pInfo;
-    end
-  end
-
-  return nil;
-end
-
---[[**
   * War Game map list iterator, which returns only arena maps.
   * This may be used in a generic for-loop.
   *
@@ -252,31 +252,4 @@ arenaWarGameIterator = function(start, last)
 
   -- No match
   return nil;
-end
-
---[[**
-  * Updates the team leader button btn to display the currently saved
-  * team leader in db.
-  *
-  * @param btn (Button) Team leader button that is going to be
-  * updated.
-  * @param db (table) Respective team's saved variables table.
-]]
-updateTeamLeaderButton = function (btn, db)
-  local pInfo = getPlayerByBattleTag(db.leader);
-  if (pInfo) then
-    btn.pID = pInfo.id;
-    btn.icon:SetTexture(pInfo.texture);
-    btn.name:SetTexture(pInfo.name);
-    btn.name:SetTextColor(0, 1, 0, 1);
-    btn.info:SetText(pInfo.text);
-    btn.bg:SetColorTexture(0, 1, 0, 0.05);
-  else
-    btn.pID = nil;
-    btn.icon:SetTexture();
-    btn.name:SetText("Choose a Player");
-    btn.name:SetTextColor(1, 0, 0, 1);
-    btn.info:SetText("Drag and Drop here.");
-    btn.bg:SetColorTexture(1.0, 0, 0, 0.05);
-  end
 end
