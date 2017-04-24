@@ -263,6 +263,7 @@ updatePlayerData = function()
       if (gameAccID) then
         _, name, _, realm = BNGetGameAccountInfo(gameAccID);
         if (client == BNET_CLIENT_WOW) then
+          realm = realm or GetRealmName();
           pText = name .. "-" .. realm;
         else
           pText = name;
