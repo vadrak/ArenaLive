@@ -25,7 +25,7 @@ end
   * @see WarGameMenu.lua
 ]]
 function PlayerButton.setPlayer(btn, pInfo)
-  btn.pID = pInfo.id;
+  btn.bTag = pInfo.bTag;
   btn.name:SetText(pInfo.name);
   btn.info:SetText(pInfo.text);
   btn.icon:SetTexture(pInfo.texture);
@@ -45,7 +45,7 @@ end
   * to be reset.
 ]]
 function PlayerButton.reset(btn)
-  btn.pID = nil;
+  btn.bTag = nil;
   btn.name:SetText("");
   btn.info:SetText("");
   btn.icon:SetTexture();
