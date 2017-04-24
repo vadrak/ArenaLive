@@ -33,7 +33,7 @@ function TeamLeaderButton.setPlayer(btn, bTag)
     TeamLeaderButton.reset(btn);
     return;
   end
-
+  btn.bTag = bTag;
   btn.icon:SeTexture(pInfo.texture);
   btn.name:SetTexture(pInfo.name);
   btn.name:SetTextColor(0, 1, 0, 1);
@@ -42,6 +42,7 @@ function TeamLeaderButton.setPlayer(btn, bTag)
 end
 
 function TeamLeaderButton.reset(btn)
+  btn.bTag = nil;
   btn.icon:SetTexture();
   btn.name:SetText("Choose a Player");
   btn.name:SetTextColor(1, 0, 0, 1);
@@ -57,6 +58,16 @@ end
   * click.
 ]]
 onClick = function(self, button, down)
+  local pInfo = ArenaLiveWarGameMenu:getCursorData();
+  if (pInfo) then
+    if (self.bTag) then
+      ArenaLiveWarGameMenu:setCursorData(self.bTag);
+    else
+      ArenaLiveWarGameMenu:setCursorData(nil);
+    end
+
+    TeamLeaderButton.setPlayer(self, pInfo.bTag);
+  end
 end
 
 --[[**
@@ -66,4 +77,8 @@ end
   * button (string) name of the mouse button responsible for the drag.
 ]]
 onDragStart = function(self, button)
+  if (self.bTag) then
+    ArenaLiveWarGameMenu:setCursorData(bTag);
+    TeamLeaderButton.reset(self);
+  end
 end
