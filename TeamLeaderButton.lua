@@ -7,8 +7,11 @@ local TeamLeaderButton  = ArenaLiveTeamLeaderButton;
   *
   * @param btn (Button) the button that is going to be initialized
   * as a team leader button.
+  * @param team (string) key of the team to which the leader stored
+  * in btn belongs to.
 ]]
-function TeamLeaderButton.init(btn)
+function TeamLeaderButton.init(btn, team)
+  btn.team = team;
   btn.title:SetText("Team Leader:");
 
   btn:RegisterForClicks("LeftButtonUp");
@@ -16,6 +19,12 @@ function TeamLeaderButton.init(btn)
 
   btn:SetScript("OnClick", onClick);
   btn:SetScript("OnDragStart", onDragStart);
+  local db = ArenaLive:getDatabase().teams;
+  if (db.leader) then
+    TeamLeaderButton.setPlayer(btn, db.leader);
+  else
+    TeamLeaderButton.reset(btn);
+  end
 end
 
 --[[**
@@ -38,6 +47,7 @@ function TeamLeaderButton.setPlayer(btn, bTag)
   btn.name:SetTextColor(0, 1, 0, 1);
   btn.info:SetText(pInfo.text);
   btn.bg:SetColorTexture(0, 1, 0, 0.05);
+
 end
 
 function TeamLeaderButton.reset(btn)
@@ -65,7 +75,10 @@ onClick = function(self, button, down)
     else
       ArenaLiveWarGameMenu:setCursorData(nil);
     end
+
     TeamLeaderButton.setPlayer(self, pInfo.bTag);
+    local db = ArenaLive:getDatabase().teams;
+    db[self.team].leader = pInfo.bTag;
   end
 end
 
@@ -77,7 +90,9 @@ end
 ]]
 onDragStart = function(self, button)
   if (self.bTag) then
-    ArenaLiveWarGameMenu:setCursorData(bTag);
+    ArenaLiveWarGameMenu:setCursorData(self.bTag);
     TeamLeaderButton.reset(self);
+    local db = ArenaLive:getDatabase().teams;
+    db[self.team].leader = nil;
   end
 end
