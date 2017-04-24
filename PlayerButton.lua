@@ -11,6 +11,7 @@ local onDragStart; -- private functions
   * initialized as a player button.
 ]]
 function PlayerButton.init(btn)
+  btn:RegisterForDrag("LeftButton");
   btn:SetScript("OnDragStart", onDragStart);
 end
 
@@ -59,4 +60,5 @@ end
   * player button.
 ]]
 onDragStart = function (btn)
+  ArenaLiveWarGameMenu:setCursorData(btn.bTag);
 end
