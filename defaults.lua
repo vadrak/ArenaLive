@@ -117,6 +117,7 @@ ArenaLive.defaults = {
         },
         NameText = {
           enabled = true,
+          realmMode = DeliUnitFrames.classes.NameText.RealmModes.NONE,
           anchor = {
             relativeTo = "UnitFrame",
             point = "TOPLEFT",
