@@ -4,8 +4,7 @@ local PlayerButton = ArenaLivePlayerButton;
 local onDragStart; -- private functions
 
 --[[**
-  * Initializes a player button btn, essentially making it an object
-  * of this class's type.
+  * Initializes the player button btn.
   *
   * btn (Button) reference to an UI button that is going to be
   * initialized as a player button.
