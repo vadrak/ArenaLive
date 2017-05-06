@@ -1,0 +1,33 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
+
+  <Frame name="ArenaLive" setAllPoints="true">
+    <Frames>
+      <Frame name="$parentLeftFrames" parentKey="leftFrames">
+        <Size>
+          <AbsDimension x="202" y="336" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="5" y="-48" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </Frame>
+      <Frame name="$parentRightFrames" parentKey="rightFrames">
+        <Size>
+          <AbsDimension x="202" y="336" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset>
+              <AbsDimension x="-5" y="-48" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </Frame>
+    </Frames>
+  </Frame>
+</Ui>

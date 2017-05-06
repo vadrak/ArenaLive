@@ -2,11 +2,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
 
-  <Frame name="ArenaLive" setAllPoints="true"/>
-
   <!-- Libraries -->
   <Include File="lib\LibStub\LibStub.lua"/>
   <Include File="lib\DeliUnitFrames\load.xml"/>
+
+  <Include file="ArenaLive.xml" />
 
   <Script File="defaults.lua"/>
   <Script File="ArenaLive.lua"/>
