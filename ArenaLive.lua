@@ -49,9 +49,31 @@ function ArenaLive:onAddonLoaded()
 
   ArenaLiveWarGameMenu:init();
 
-  -- Create a test frame
-  local frame = self.UnitFrame:new("left", nil, "ArenaLiveTestFrame",
-    self, "ArenaLiveUnitFrameTemplate", "target");
+  for i = 1, self.MAX_PLAYERS, 1 do
+    self:createUnitFrame(i, "left");
+    self:createUnitFrame(i, "right");
+  end
+
+end
+
+--[[**
+  * Creates a single unit frame with the given id on the given side.
+  *
+  * @param id (number) the frame's id on its side.
+  * @param side (string) the side to which the frame is added, may be
+  * "left" or "right".
+]]
+function ArenaLive:createUnitFrame(id, side)
+  local parent;
+  if (side == "left") then
+    parent = self.leftFrames;
+  else
+    parent = self.rightFrames;
+  end
+  local name = parent:GetName() .. "Frame" .. tostring(id);
+  local frame = self.UnitFrame:new(id, side, "Button", name, parent,
+  "ArenaLiveUnitFrameTemplate", "player");
+
   self.UnitFrameManager:addFrame(frame);
   self.ClassIcon:addToFrame(frame);
   self.HealthBar:addToFrame(frame);
@@ -60,6 +82,7 @@ function ArenaLive:onAddonLoaded()
   self.DebuffFrame:addToFrame(frame);
   self.CastBar:addToFrame(frame);
   self.NameText:addToFrame(frame);
+
   local nt = frame.components.NameText;
   nt:SetParent(ArenaLiveTestFrameBorder:GetParent());
 end
