@@ -101,14 +101,17 @@ end
 ]]
 function ArenaLive:createUnitFrame(id, side)
   local parent;
+  local template;
   if (side == "left") then
     parent = self.leftFrames;
+    template = "ArenaLiveLeftUnitFrameTemplate";
   else
     parent = self.rightFrames;
+    template = "ArenaLiveRightUnitFrameTemplate";
   end
   local name = parent:GetName() .. "Frame" .. tostring(id);
   local frame = self.UnitFrame:new(id, side, "Button", name, parent,
-  "ArenaLiveUnitFrameTemplate", "player");
+    template, "player");
 
   self.UnitFrameManager:addFrame(frame);
 
