@@ -37,6 +37,7 @@ assert(DeliUnitFrames, "ArenaLive requires DeliUnitFrames.");
 function ArenaLive:init()
   self:SetScript("OnEvent", self.onEvent);
   self:RegisterEvent("ADDON_LOADED");
+  self:RegisterEvent("UPADTE_BATTLEFIELD_STATUS");
   self.UnitFrameManager = DeliUnitFrames.classes.UnitFrameManager:new();
 
   local ufm = self.UnitFrameManager;
@@ -69,6 +70,20 @@ function ArenaLive:onEvent(event, ...)
   local arg1 = ...;
   if (event == "ADDON_LOADED" and arg1 == addonName) then
     self:onAddonLoaded();
+  elseif (event == "UPDATE_BATTLEFIELD_STATUS") then
+    local status = GetBattlefieldStatus(arg1);
+    local winner = GetBattlefieldWinner();
+    local inInstance, instanceType = IsInInstance();
+    local spectator = (C_Commentator.GetMode() > 0
+      and instanceType == "arena");
+
+    if (status == "active" and arg1 == self.bfSID and winner) then
+      self:disable();
+    elseif (status == "active" and spectator) then
+        self:enable(arg1);
+    elseif (status == "none" and arg1 == self.bfSID) then
+      self:disable();
+    end
   end
 end
 
@@ -82,7 +97,6 @@ function ArenaLive:onAddonLoaded()
   end
 
   self.db = ArenaLiveDB;
-
   ArenaLiveWarGameMenu:init();
 
   for i = 1, self.MAX_PLAYERS, 1 do
@@ -90,8 +104,50 @@ function ArenaLive:onAddonLoaded()
     self:createUnitFrame(i, "right");
   end
 
+  self:disable();
 end
 
+--[[**
+  * Enables the spectator user interface, hiding all regular UI
+  * elements.
+  *
+  * @param bfSID (number) the battlefield status ID of the currently
+  * spectated arena.
+]]
+function ArenaLive:enable(bfSID)
+  self.bfSID = bfID;
+
+  UIParent:Hide();
+  for i = 1, self.MAX_PLAYERS, 1 do
+    local frame = self.leftFrames[i];
+    frame:enable();
+    frame:setUnit("spectateda" .. i);
+
+    frame = self.rightFrames[i];
+    frame:enable();
+    frame:setUnit("spectatedb" .. i);
+  end
+  self:Show();
+  local db = self:getDatabase();
+
+  C_Commentator.SetUseSmartCamera(db.useSmartCamera);
+  C_Commentator.SetSmartCameraLocked(db.useSmartCamera);
+  self.enabled = true;
+end
+--[[**
+  * Disables the spectator user interface and show all regular UI
+  * elements instead.
+]]
+function ArenaLive:disable()
+  for i = 1, self.MAX_PLAYERS, 1 do
+    self.leftFrames[i]:disable();
+    self.rightFrames[i]:disable();
+  end
+
+  self:Hide();
+  UIParent:Show();
+  self.enabled = false;
+end
 --[[**
   * Creates a single unit frame with the given id on the given side.
   *
