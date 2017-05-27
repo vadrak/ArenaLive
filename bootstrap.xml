@@ -6,6 +6,7 @@
   <Include File="lib\LibStub\LibStub.lua"/>
   <Include File="lib\DeliUnitFrames\load.xml"/>
 
+  <Include file="Fonts.xml" />
   <Include file="ArenaLive.xml" />
 
   <Script File="defaults.lua"/>
