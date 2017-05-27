@@ -117,7 +117,7 @@ ArenaLive.defaults = {
           hideTradeSkills = true,
         },
         NameText = {
-          colorMode = DeliUnitFrames.classes.NameText.ColorModes.CLASS,
+          colorMode = DeliUnitFrames.classes.NameText.ColorModes.NONE,
           enabled = true,
           realmMode = DeliUnitFrames.classes.NameText.RealmModes.NONE,
           anchor = {
@@ -236,7 +236,7 @@ ArenaLive.defaults = {
           hideTradeSkills = true,
         },
         NameText = {
-          colorMode = DeliUnitFrames.classes.NameText.ColorModes.CLASS,
+          colorMode = DeliUnitFrames.classes.NameText.ColorModes.NONE,
           enabled = true,
           realmMode = DeliUnitFrames.classes.NameText.RealmModes.NONE,
           anchor = {
