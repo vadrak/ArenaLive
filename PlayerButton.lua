@@ -1,7 +1,7 @@
 local addonName, L = ...;
 ArenaLivePlayerButton = {};
 local PlayerButton = ArenaLivePlayerButton;
-local onDragStart; -- private functions
+local onDragStart, onClick; -- private functions
 
 --[[**
   * Initializes the player button btn.
@@ -10,8 +10,10 @@ local onDragStart; -- private functions
   * initialized as a player button.
 ]]
 function PlayerButton.init(btn)
+  btn:RegisterForClicks("LeftButtonUp");
   btn:RegisterForDrag("LeftButton");
   btn:SetScript("OnDragStart", onDragStart);
+  btn:SetScript("OnClick", onClick);
 end
 
 --[[**
@@ -60,4 +62,10 @@ end
 ]]
 onDragStart = function (btn)
   ArenaLiveWarGameMenu:setCursorData(btn.bTag);
+end
+
+onClick = function(btn, mouseButton, down)
+  if (ArenaLiveWarGameMenu:getCursorData()) then
+    ArenaLiveWarGameMenu:setCursorData(nil);
+  end
 end

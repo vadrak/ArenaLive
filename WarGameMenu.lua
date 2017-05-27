@@ -33,9 +33,10 @@ function ArenaLiveWarGameMenu:init()
   ArenaLiveTeamLeaderButton.init(self.rLeadBtn, "right");
 
   self.tournModeBtn:SetChecked(db.tournamentMode)
-
+  self:RegisterForClicks("LeftButtonDown");
   self:SetScript("OnShow", self.onShow);
   self:SetScript("OnEvent", self.onEvent);
+  self:SetScript("OnClick", self.onClick);
   self.startBtn:SetScript("OnClick", self.startWarGame);
 end
 
@@ -61,6 +62,15 @@ function ArenaLiveWarGameMenu:onEvent(event, ...)
   end
 end
 
+--[[**
+  * OnClick callback of ArenaLive's war game menu. This is used
+  * to reset the cursor's data.
+]]
+function ArenaLiveWarGameMenu:onClick(button, down)
+  if (CURSOR_DATA) then
+    self:setCursorData(nil);
+  end
+end
 --[[**
   * Updates the war game menu's player list.
 ]]
