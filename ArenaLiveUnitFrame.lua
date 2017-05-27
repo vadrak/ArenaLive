@@ -2,6 +2,8 @@ local UnitFrame = DeliUnitFrames:newClass("ArenaLiveUnitFrame",
   "AbstractUnitFrame");
 ArenaLive.UnitFrame = UnitFrame;
 
+local onEvent; -- private functions
+
 --[[**
   * @Override
   * Initializes this ArenaLiveUnitFrame object.
@@ -17,11 +19,14 @@ function UnitFrame:init(id, group, frameType, name, parent, template, unit)
   elseif (group == "right") then
     ArenaLive.rightFrames[id] = self;
   else
-    error(
-      "Error in ArenaLiveUnitFrame:init(): Invalid frame group "
-      .. group .. ".");
+    error("Error in ArenaLiveUnitFrame:init(): Invalid frame group " ..
+      group .. ".");
   end
+  self.frame:SetScript("OnEvent",
+    function(frame, event, ...) onEvent(self, event,...)end);
+  self.frame:RegisterEvent("PLAYER_TARGET_CHANGED");
 end
+
 
 --[[**
   * @Override
@@ -58,4 +63,22 @@ function UnitFrame:updateAppearance()
     relativeTo = ArenaLive.rightFrames[self.id - 1].frame;
   end
   self.frame:SetPoint("TOPLEFT", relativeTo, "BOTTOMLEFT", 0, -64);
+end
+
+--[[
+  * ArenaLive's unit frame OnEvent script callback. We use this to
+  * reduce a unit frame's alpha, if it is not the current target of
+  * the spectator.
+]]
+function onEvent(unitFrame, event, ...)
+  if (event == "PLAYER_TARGET_CHANGED") then
+    if (not unitFrame.enabled) then
+      return;
+    end
+    if (UnitIsUnit(unitFrame.unit, "target")) then
+      unitFrame.frame:SetAlpha(1);
+    else
+      unitFrame.frame:SetAlpha(0.75);
+    end
+  end
 end
