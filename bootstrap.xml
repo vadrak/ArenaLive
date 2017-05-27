@@ -10,6 +10,7 @@
   <Include file="ArenaLive.xml" />
 
   <Script File="defaults.lua"/>
+  <Script File="TimeFrame.lua"/>
   <Script File="ArenaLive.lua"/>
   <Script File="SlashCommands.lua" />
   <Include File="ArenaLiveUnitFrameTemplate.xml"/>

@@ -4,6 +4,41 @@
 
   <Frame name="ArenaLive" setAllPoints="true">
     <Frames>
+      <Frame name="$parentTimeFrame" parentKey="timeFrame">
+        <Size>
+          <AbsDimension x="108" y="58" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOP">
+            <Offset>
+              <AbsDimension x="" y="-25" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer level="BACKGROUND">
+            <Texture name="$parentBackground" setAllPoint="true">
+              <Color r="0" g="0" b="0" a="0.5" />
+            </Texture>
+          </Layer>
+          <Layer level="ARTWORK">
+            <Texture name="$parentTexture"
+              file="Interface\AddOns\ArenaLive\textures\TimeFrameBackground">
+              <Size>
+                <AbsDimension x="100" y="50" />
+              </Size>
+              <Anchors>
+                <Anchor point="CENTER" />
+              </Anchors>
+            </Texture>
+          </Layer>
+          <Layer level="OVERLAY">
+            <FontString name="$parentText" parentKey="text" 
+              inherits="ArenaLiveTopBarFont" setAllPoints="true"
+              text="00:00"/>
+          </Layer>
+        </Layers>
+      </Frame>
       <Frame name="$parentLeftFrames" parentKey="leftFrames">
         <Size>
           <AbsDimension x="202" y="336" />

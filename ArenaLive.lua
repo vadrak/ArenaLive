@@ -48,6 +48,8 @@ function ArenaLive:init()
   self.DebuffFrame = DeliUnitFrames.classes.DebuffFrame:new(ufm);
   self.CastBar = DeliUnitFrames.classes.CastBar:new(ufm, nil);
   self.NameText = DeliUnitFrames.classes.NameText:new(ufm);
+
+  self.timeFrame:init();
 end
 
 --[[**
@@ -127,6 +129,7 @@ function ArenaLive:enable(bfSID)
     frame:enable();
     frame:setUnit("spectatedb" .. i);
   end
+  self.timeFrame:enable();
   self:Show();
   local db = self:getDatabase();
 
@@ -145,6 +148,7 @@ function ArenaLive:disable()
   end
 
   self:Hide();
+  self.timeFrame:disable();
   UIParent:Show();
   self.enabled = false;
 end
