@@ -32,6 +32,13 @@ function ArenaLiveWarGameMenu:init()
   ArenaLiveTeamLeaderButton.init(self.lLeadBtn, "left");
   ArenaLiveTeamLeaderButton.init(self.rLeadBtn, "right");
 
+  --[[
+    * We increase the team leader buttons' frame level here, because
+    * otherwise they would be below the map scroll frame.
+  ]]
+  self.lLeadBtn:SetFrameLevel(self.lLeadBtn:GetFrameLevel() + 3);
+  self.rLeadBtn:SetFrameLevel(self.rLeadBtn:GetFrameLevel() + 3);
+
   self.tournModeBtn:SetChecked(db.tournamentMode)
   self:RegisterForClicks("LeftButtonDown");
   self:SetScript("OnShow", self.onShow);
@@ -111,19 +118,21 @@ function ArenaLiveWarGameMenuPlayerListScrollFrame:update()
   local buttons = self.buttons;
   local numButtons = #buttons;
   local button, index;
+  local height = 0;
   for i = 1, numButtons, 1 do
     button = buttons[i];
     index = i + offset;
 
     if (index <= #PLAYER_LIST) then
       ArenaLivePlayerButton.setPlayer(button, PLAYER_LIST[index]);
+      height = height + MAP_BUTTON_HEIGHT;
     else
       ArenaLivePlayerButton.reset(button);
     end
   end
 
   local totalHeight = #PLAYER_LIST * PLAYER_BUTTON_HEIGHT;
-  HybridScrollFrame_Update(self, totalHeight, self:GetHeight());
+  HybridScrollFrame_Update(self, totalHeight, height);
 end
 
 --[[**
@@ -144,18 +153,20 @@ function ArenaLiveWarGameMenuMapsScrollFrame:update()
   local buttons = self.buttons;
   local numButtons = #buttons;
   local selMap = ArenaLive:getDatabase().map;
+  local height = 0;
   for i = 1, numButtons, 1 do
     local button = buttons[i];
     local index = offset + i;
     if (index <= #arenas) then
       ArenaLiveMapButton.setMap(button, arenas[index]);
+      height = height + MAP_BUTTON_HEIGHT;
     else
       ArenaLiveMapButton.reset(button);
     end
   end
 
   local totalHeight = #arenas * MAP_BUTTON_HEIGHT;
-  HybridScrollFrame_Update(self, totalHeight, self:GetHeight());
+  HybridScrollFrame_Update(self, totalHeight, height);
 end
 
 --[[**
