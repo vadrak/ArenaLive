@@ -8,6 +8,7 @@
 
   <Include file="Fonts.xml" />
   <Include file="ArenaLive.xml" />
+  <Include file="HideUIButton.xml"/>
 
   <Script File="defaults.lua"/>
   <Script File="TimeFrame.lua"/>
