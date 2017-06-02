@@ -104,8 +104,8 @@ end
 function ArenaLiveWarGameMenu:updateTeamLeaderButtons()
   if (self:IsShown()) then
     local db = ArenaLive:getDatabase();
-    ArenaLiveTeamLeaderButton.setPlayer(self.lLeadBtn, db.teams.left);
-    ArenaLiveTeamLeaderButton.setPlayer(self.rLeadBtn, db.teams.right);
+    ArenaLiveTeamLeaderButton.setPlayer(self.lLeadBtn, db.teams.left.leader);
+    ArenaLiveTeamLeaderButton.setPlayer(self.rLeadBtn, db.teams.right.leader);
   end
 end
 
