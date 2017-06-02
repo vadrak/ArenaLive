@@ -1,6 +1,7 @@
 ArenaLive.defaults = {
   map = nil,
   tournamentMode = true,
+  useSmartCamera = false,
   teams = {
     left = {
       leader = nil,
