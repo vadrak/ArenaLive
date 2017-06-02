@@ -37,7 +37,8 @@ assert(DeliUnitFrames, "ArenaLive requires DeliUnitFrames.");
 function ArenaLive:init()
   self:SetScript("OnEvent", self.onEvent);
   self:RegisterEvent("ADDON_LOADED");
-  self:RegisterEvent("UPADTE_BATTLEFIELD_STATUS");
+  self:RegisterEvent("UPDATE_BATTLEFIELD_STATUS");
+  self:RegisterEvent("COMMENTATOR_PLAYER_UPDATE");
   self.UnitFrameManager = DeliUnitFrames.classes.UnitFrameManager:new();
 
   local ufm = self.UnitFrameManager;
@@ -50,6 +51,7 @@ function ArenaLive:init()
   self.NameText = DeliUnitFrames.classes.NameText:new(ufm);
 
   self.timeFrame:init();
+  ArenaLiveHideUIButton:init();
 end
 
 --[[**
@@ -72,6 +74,17 @@ function ArenaLive:onEvent(event, ...)
   local arg1 = ...;
   if (event == "ADDON_LOADED" and arg1 == addonName) then
     self:onAddonLoaded();
+  elseif (event == "COMMENTATOR_PLAYER_UPDATE") then
+    --[[
+      * This event does not mean that all relevant player information
+      * has been loaded, but just that the commentator system has
+      * added a new player. That is why we use a timer callback here,
+      * this should give the client enough time to load all data we
+      * need to update our unit frames correctly.
+    ]]
+    C_Timer.After(2, function() self:updateUnitFrames()end);
+  elseif (event == "PLAYER_TARGET_CHANGED") then
+    C_Commentator.FollowUnit("target");
   elseif (event == "UPDATE_BATTLEFIELD_STATUS") then
     local status = GetBattlefieldStatus(arg1);
     local winner = GetBattlefieldWinner();
@@ -79,7 +92,8 @@ function ArenaLive:onEvent(event, ...)
     local spectator = (C_Commentator.GetMode() > 0
       and instanceType == "arena");
 
-    if (status == "active" and arg1 == self.bfSID and winner) then
+    if ((status == "active" and arg1 == self.bfSID and winner)
+        or (status == "none" and arg1 == self.bfSID)) then
       self:disable();
     elseif (status == "active" and spectator) then
         self:enable(arg1);
@@ -117,7 +131,7 @@ end
   * spectated arena.
 ]]
 function ArenaLive:enable(bfSID)
-  self.bfSID = bfID;
+  self.bfSID = bfSID;
 
   UIParent:Hide();
   for i = 1, self.MAX_PLAYERS, 1 do
@@ -130,12 +144,14 @@ function ArenaLive:enable(bfSID)
     frame:setUnit("spectatedb" .. i);
   end
   self.timeFrame:enable();
+  ArenaLiveHideUIButton:enable();
   self:Show();
   local db = self:getDatabase();
 
   C_Commentator.SetUseSmartCamera(db.useSmartCamera);
   C_Commentator.SetSmartCameraLocked(db.useSmartCamera);
   self.enabled = true;
+  self:RegisterEvent("PLAYER_TARGET_CHANGED");
 end
 --[[**
   * Disables the spectator user interface and show all regular UI
@@ -149,7 +165,9 @@ function ArenaLive:disable()
 
   self:Hide();
   self.timeFrame:disable();
+  ArenaLiveHideUIButton:disable();
   UIParent:Show();
+  self:UnregisterEvent("PLAYER_TARGET_CHANGED");
   self.enabled = false;
 end
 --[[**
@@ -194,4 +212,13 @@ function ArenaLive:createUnitFrame(id, side)
   nt:SetParent(frame.components.HealthBar);
 end
 
+--[[**
+  * Updates all of ArenaLive's unit frames.
+]]
+function ArenaLive:updateUnitFrames()
+  for i = 1, self.MAX_PLAYERS, 1 do
+    self.leftFrames[i]:update();
+    self.rightFrames[i]:update();
+  end
+end
 ArenaLive:init();
