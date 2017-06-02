@@ -34,6 +34,7 @@ function TimeFrame:onEvent(event, ...)
   end
 
   local _, _, _, text = GetWorldStateUIInfo(self.index);
+  text = string.match(text, "([0-9]+:[0-9]+)");
   self.text:SetText(text);
 end
 
@@ -44,6 +45,7 @@ function TimeFrame:updateTimerIndex()
   local numStates = GetNumWorldStateUI();
   for i = 1, numStates, 1 do
     local uiType = GetWorldStateUIInfo(i);
+    -- An UI type of 3 indicates timer frames.
     if (uiType == 3) then
       self.index = i;
       break;
