@@ -2,7 +2,6 @@
   * Stores and displays up to the last ten spells that a unit cast.
   *
   * TODO: Automatically update version number on commit.
-  *       Fade out icons after certain amount of time.
 ]]
 local addonName, L = ...;
 local version = 20170603;
@@ -15,7 +14,7 @@ CastHistory = DeliUnitFrames:newClass("ArenaLiveCastHistory",
   "AbstractScriptComponent");
 
 local MAX_CACHE_SIZE = 10;
-local newCacheEntry, castIterator, anchorIcon; -- private functions
+local newCacheEntry, castIterator, fadeAnimationOnFinish; -- private functions
 CastHistory.version = version;
 CastHistory.Directions = { -- Enum for directions
   UPWARDS = 1,
@@ -85,15 +84,19 @@ function CastHistory:update(unitFrame)
   local curTime = GetTime();
   for id, spellID, texture, timeCast in self:getIterator(unitFrame.unit) do
     local icon = history.icons[id];
+    icon.fadeOutAnim:Stop();
+    local remDuration = (timeCast + settings.duration) - curTime;
     if (id > settings.numIcons) then
       break;
-    elseif ((timeCast + settings.duration) <= curTime) then
+    elseif (remDuration <= 0) then
       break;
     end
 
     icon.spellID = spellID;
     icon.texture:SetTexture(texture);
     icon:Show();
+    icon.fadeOutAnim.alpha:SetStartDelay(remDuration);
+    icon.fadeOutAnim:Play();
     index = index + 1;
   end
 
@@ -131,7 +134,9 @@ function CastHistory:updateAppearance(unitFrame)
     if (not history.icons[i]) then
       icon = CreateFrame("Button", prefix .. "Button" .. i,
         history, "ArenaLiveCastHistoryIconTemplate");
-        history.icons[i] = icon;
+
+      icon.fadeOutAnim:SetScript("OnFinished", fadeAnimationOnFinish);
+      history.icons[i] = icon;
     end
 
     icon:SetSize(settings.iconSize, settings.iconSize);
@@ -295,4 +300,9 @@ function castIterator(casts, lastID)
   local timeCast = casts[index].time;
 
   return id, spellID, texture, timeCast;
+end
+
+function fadeAnimationOnFinish(animGroup, requested)
+  local icon = animGroup:GetParent();
+  icon:Hide();
 end

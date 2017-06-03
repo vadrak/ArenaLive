@@ -27,5 +27,13 @@
         </Texture>
       </Layer>
     </Layers>
+    <Animations>
+      <AnimationGroup name="$parentFadeOut" parentKey="fadeOutAnim"
+        looping="NONE">
+        <Alpha name="$parentAlpha" parentKey="alpha" startDelay="5"
+          duration="1" smoothing="OUT" fromAlpha="1" toAlpha="0"
+          order="1" />
+      </AnimationGroup>
+    </Animations>
   </Button>
 </Ui>
