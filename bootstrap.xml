@@ -18,6 +18,7 @@
   <Script file="ArenaLive.lua"/>
   <Script file="SlashCommands.lua" />
   <Include file="ArenaLiveUnitFrameTemplate.xml"/>
+  <Include file="AuraTemplates.xml"/>
   <Script file="ArenaLiveUnitFrame.lua"/>
   <Include file="PlayerButtonTemplate.xml" />
   <Include file="TeamLeaderButtonTemplate.xml" />

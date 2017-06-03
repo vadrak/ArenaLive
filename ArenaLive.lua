@@ -50,7 +50,8 @@ function ArenaLive:init()
   self.PowerBar = DeliUnitFrames.classes.PowerBar:new(ufm);
   self.ClassIcon = DeliUnitFrames.classes.ClassIcon:new(ufm);
   self.BuffFrame = DeliUnitFrames.classes.BuffFrame:new(ufm);
-  self.DebuffFrame = DeliUnitFrames.classes.DebuffFrame:new(ufm);
+  self.DebuffFrame = DeliUnitFrames.classes.DebuffFrame:new(ufm,
+    "ArenaLiveDebuffTemplate");
   self.CastBar = DeliUnitFrames.classes.CastBar:new(ufm, nil);
   self.CastHistory = DeliUnitFrames.classes.ArenaLiveCastHistory:new(ufm);
   self.NameText = DeliUnitFrames.classes.NameText:new(ufm);
