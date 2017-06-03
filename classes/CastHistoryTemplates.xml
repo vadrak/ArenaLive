@@ -26,6 +26,15 @@
           </Anchors>
         </Texture>
       </Layer>
+      <Layer level="OVERLAY">
+        <Texture name="$parentOverlay"
+            file="Interface\AddOns\ArenaLive\textures\IconOverlay">
+          <Anchors>
+            <Anchor point="TOPLEFT" relativeTo="$parentTexture"/>
+            <Anchor point="BOTTOMRIGHT" relativeTo="$parentTexture"/>
+          </Anchors>
+        </Texture>
+      </Layer>
     </Layers>
     <Animations>
       <AnimationGroup name="$parentFadeOut" parentKey="fadeOutAnim"
