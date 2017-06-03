@@ -78,7 +78,7 @@ function onEvent(unitFrame, event, ...)
     if (UnitIsUnit(unitFrame.unit, "target")) then
       unitFrame.frame:SetAlpha(1);
     else
-      unitFrame.frame:SetAlpha(0.5);
+      unitFrame.frame:SetAlpha(0.65);
     end
   end
 end
