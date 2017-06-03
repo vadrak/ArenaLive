@@ -43,18 +43,6 @@ function ArenaLive:init()
   self:RegisterEvent("ADDON_LOADED");
   self:RegisterEvent("UPDATE_BATTLEFIELD_STATUS");
   self:RegisterEvent("COMMENTATOR_PLAYER_UPDATE");
-  self.UnitFrameManager = DeliUnitFrames.classes.UnitFrameManager:new();
-
-  local ufm = self.UnitFrameManager;
-  self.HealthBar = DeliUnitFrames.classes.HealthBar:new(ufm);
-  self.PowerBar = DeliUnitFrames.classes.PowerBar:new(ufm);
-  self.ClassIcon = DeliUnitFrames.classes.ClassIcon:new(ufm);
-  self.BuffFrame = DeliUnitFrames.classes.BuffFrame:new(ufm);
-  self.DebuffFrame = DeliUnitFrames.classes.DebuffFrame:new(ufm,
-    "ArenaLiveDebuffTemplate");
-  self.CastBar = DeliUnitFrames.classes.CastBar:new(ufm, nil);
-  self.CastHistory = DeliUnitFrames.classes.ArenaLiveCastHistory:new(ufm);
-  self.NameText = DeliUnitFrames.classes.NameText:new(ufm);
 
   self.timeFrame:init();
   ArenaLiveHideUIButton:init();
@@ -120,6 +108,19 @@ function ArenaLive:onAddonLoaded()
 
   self.db = ArenaLiveDB;
   ArenaLiveWarGameMenu:init();
+
+  local ufm = DeliUnitFrames.classes.UnitFrameManager:new();
+  self.UnitFrameManager = ufm;
+  self.HealthBar = DeliUnitFrames.classes.HealthBar:new(ufm);
+  self.PowerBar = DeliUnitFrames.classes.PowerBar:new(ufm);
+  self.ClassIcon = DeliUnitFrames.classes.ClassIcon:new(ufm);
+  self.BuffFrame = DeliUnitFrames.classes.BuffFrame:new(ufm);
+  self.DebuffFrame = DeliUnitFrames.classes.DebuffFrame:new(ufm,
+    "ArenaLiveDebuffTemplate");
+  self.CastBar = DeliUnitFrames.classes.CastBar:new(ufm,
+    "ArenaLiveCastBarTemplate");
+  self.CastHistory = DeliUnitFrames.classes.ArenaLiveCastHistory:new(ufm);
+  self.NameText = DeliUnitFrames.classes.NameText:new(ufm);
 
   for i = 1, self.MAX_PLAYERS, 1 do
     self:createUnitFrame(i, "left");
