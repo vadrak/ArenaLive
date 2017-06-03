@@ -27,7 +27,11 @@
 local addonName, L = ...;
 local ArenaLive = ArenaLive;
 ArenaLive.MAX_PLAYERS = 3;
-
+local DEBUG_UNITS = {
+  "player",
+  "target",
+  "focus",
+}
 assert(DeliUnitFrames, "ArenaLive requires DeliUnitFrames.");
 
 --[[**
@@ -48,6 +52,7 @@ function ArenaLive:init()
   self.BuffFrame = DeliUnitFrames.classes.BuffFrame:new(ufm);
   self.DebuffFrame = DeliUnitFrames.classes.DebuffFrame:new(ufm);
   self.CastBar = DeliUnitFrames.classes.CastBar:new(ufm, nil);
+  self.CastHistory = DeliUnitFrames.classes.ArenaLiveCastHistory:new(ufm);
   self.NameText = DeliUnitFrames.classes.NameText:new(ufm);
 
   self.timeFrame:init();
@@ -153,6 +158,34 @@ function ArenaLive:enable(bfSID)
   self.enabled = true;
   self:RegisterEvent("PLAYER_TARGET_CHANGED");
 end
+
+--[[**
+  * Toggles ArenaLive's debug mode, activating/deactivating the
+  * spectator interface outside of spectated war games and setting
+  * all unit frames to display either the player, target or focus.
+]]
+function ArenaLive:debug()
+  if (not self.debugEnabled) then
+    for i = 1, self.MAX_PLAYERS, 1 do
+      local frame = self.leftFrames[i];
+      frame:enable();
+      frame:setUnit(DEBUG_UNITS[i]);
+
+      frame = self.rightFrames[i];
+      frame:enable();
+      frame:setUnit(DEBUG_UNITS[i]);
+    end
+
+    ArenaLiveHideUIButton:enable();
+    UIParent:Hide();
+    self:Show();
+    self.debugEnabled = true;
+  else
+    self:disable();
+    self.debugEnabled = false;
+  end
+end
+
 --[[**
   * Disables the spectator user interface and show all regular UI
   * elements instead.
@@ -202,14 +235,15 @@ function ArenaLive:createUnitFrame(id, side)
   self.BuffFrame:addToFrame(frame);
   self.DebuffFrame:addToFrame(frame);
   self.CastBar:addToFrame(frame);
+  self.CastHistory:addToFrame(frame);
   self.NameText:addToFrame(frame);
 
   --[[
     * We have to change the name text's parent, otherwise it
     * would be hidden behind the player's health bar.
     ]]
-  local nt = frame.components.NameText;
-  nt:SetParent(frame.components.HealthBar);
+  local nt = frame.components.NameText.element;
+  nt:SetParent(frame.components.HealthBar.element);
 end
 
 --[[**
