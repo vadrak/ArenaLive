@@ -58,6 +58,38 @@ ArenaLive.defaults = {
           height = 20,
           texture = "Interface\\AddOns\\ArenaLive\\textures\\StatusBar",
         },
+        CastBar = {
+          enabled = true,
+          anchor = {
+            relativeTo = "UnitFrame",
+            point = "BOTTOMLEFT",
+            relativePoint = "BOTTOMRIGHT",
+            x = 24,
+            y = 26,
+          },
+          width = 63,
+          height = 21,
+          texture = "Interface\\AddOns\\ArenaLive\\textures\\StatusBar",
+          font = "GameFontNormalSmall",
+          hideTradeSkills = true,
+        },
+        ArenaLiveCastHistory = {
+          enabled = true,
+          anchor = {
+            relativeTo = "CastBar",
+            point = "TOPLEFT",
+            relativePoint = "BOTTOMLEFT",
+            x = -22,
+            y = -2,
+          },
+          direction =
+            DeliUnitFrames.classes.ArenaLiveCastHistory.Directions.RIGHT,
+          duration = 7,
+          iconSize = 24,
+          height = 1,
+          width = 1,
+          numIcons = 5,
+        },
         ClassIcon = {
           enabled = true,
           anchor = {
@@ -101,21 +133,6 @@ ArenaLive.defaults = {
           filter = "",
           iconSize = 20,
           showCooldownText = false,
-        },
-        CastBar = {
-          enabled = true,
-          anchor = {
-            relativeTo = "UnitFrame",
-            point = "BOTTOMLEFT",
-            relativePoint = "BOTTOMRIGHT",
-            x = 22,
-            y = 26,
-          },
-          width = 63,
-          height = 21,
-          texture = "Interface\\AddOns\\ArenaLive\\textures\\StatusBar",
-          font = "GameFontNormalSmall",
-          hideTradeSkills = true,
         },
         NameText = {
           colorMode = DeliUnitFrames.classes.NameText.ColorModes.NONE,
@@ -177,6 +194,22 @@ ArenaLive.defaults = {
           height = 20,
           texture = "Interface\\AddOns\\ArenaLive\\textures\\StatusBar",
         },
+        ArenaLiveCastHistory = {
+          enabled = true,
+          anchor = {
+            relativeTo = "CastBar",
+            point = "TOPRIGHT",
+            relativePoint = "BOTTOMRIGHT",
+            x = 24,
+            y = -2,
+          },
+          direction = DeliUnitFrames.classes.ArenaLiveCastHistory.Directions.LEFT,
+          duration = 7,
+          iconSize = 20,
+          height = 1,
+          width = 1,
+          numIcons = 5,
+        },
         ClassIcon = {
           enabled = true,
           anchor = {
@@ -225,9 +258,9 @@ ArenaLive.defaults = {
           enabled = true,
           anchor = {
             relativeTo = "UnitFrame",
-            point = "BOTTOMLEFT",
-            relativePoint = "BOTTOMRIGHT",
-            x = 22,
+            point = "BOTTOMRIGHT",
+            relativePoint = "BOTTOMLEFT",
+            x = -24,
             y = 26,
           },
           width = 63,

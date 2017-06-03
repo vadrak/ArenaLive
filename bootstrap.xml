@@ -3,21 +3,24 @@
     xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
 
   <!-- Libraries -->
-  <Include File="lib\LibStub\LibStub.lua"/>
-  <Include File="lib\DeliUnitFrames\load.xml"/>
+  <Script file="lib\LibStub\LibStub.lua"/>
+  <Include file="lib\DeliUnitFrames\load.xml"/>
+
+  <!-- Custom unit frame components -->
+  <Include file="classes\CastHistoryTemplates.xml"/>
 
   <Include file="Fonts.xml" />
   <Include file="ArenaLive.xml" />
   <Include file="HideUIButton.xml"/>
 
-  <Script File="defaults.lua"/>
-  <Script File="TimeFrame.lua"/>
-  <Script File="ArenaLive.lua"/>
-  <Script File="SlashCommands.lua" />
-  <Include File="ArenaLiveUnitFrameTemplate.xml"/>
-  <Script File="ArenaLiveUnitFrame.lua"/>
-  <Include File="PlayerButtonTemplate.xml" />
+  <Script file="defaults.lua"/>
+  <Script file="TimeFrame.lua"/>
+  <Script file="ArenaLive.lua"/>
+  <Script file="SlashCommands.lua" />
+  <Include file="ArenaLiveUnitFrameTemplate.xml"/>
+  <Script file="ArenaLiveUnitFrame.lua"/>
+  <Include file="PlayerButtonTemplate.xml" />
   <Include file="TeamLeaderButtonTemplate.xml" />
   <Include file="MapButtonTemplate.xml" />
-  <Include File="WarGameMenu.xml"/>
+  <Include file="WarGameMenu.xml"/>
 </Ui>
