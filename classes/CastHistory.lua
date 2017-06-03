@@ -84,7 +84,6 @@ function CastHistory:update(unitFrame)
   local curTime = GetTime();
   for id, spellID, texture, timeCast in self:getIterator(unitFrame.unit) do
     local icon = history.icons[id];
-    icon.fadeOutAnim:Stop();
     local remDuration = (timeCast + settings.duration) - curTime;
     if (id > settings.numIcons) then
       break;
@@ -92,6 +91,7 @@ function CastHistory:update(unitFrame)
       break;
     end
 
+    icon.fadeOutAnim:Stop();
     icon.spellID = spellID;
     icon.texture:SetTexture(texture);
     icon:Show();
