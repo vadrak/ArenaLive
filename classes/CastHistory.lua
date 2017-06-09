@@ -4,7 +4,7 @@
   * TODO: Automatically update version number on commit.
 ]]
 local addonName, L = ...;
-local version = 20170603;
+local version = 20170609;
 local CastHistory = DeliUnitFrames:getClass("ArenaLiveCastHistory");
 if (CastHistory and CastHistory.version >= version) then
   -- A more recent version has been loaded already.
@@ -175,6 +175,25 @@ function CastHistory:updateAppearance(unitFrame)
     history.icons[i]:Hide();
   end
 end
+
+--[[**
+  * Reset unitFrame's cast history, hiding all icons.
+  *
+  * @param AbstractUnitFrame (UnitFrame) The unit frame that's cast
+  * history is going to be reset.
+]]
+function CastHistory:reset(unitFrame)
+  local history = self:getUIElement(unitFrame);
+  if (not history) then
+    return;
+  end
+
+  for i = 1, #history.icons, 1 do
+    history.icons[i].fadeOutAnim:Stop();
+    history.icons[i]:Hide();
+  end
+end
+
 --[[**
   * Returns a stateless iterator that may be used in a generic for
   * loop to traverse all recently cast spells by unit.
