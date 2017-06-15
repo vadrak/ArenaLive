@@ -5,6 +5,7 @@
   <!-- Libraries -->
   <Script file="lib\LibStub\LibStub.lua"/>
   <Include file="lib\DeliUnitFrames\load.xml"/>
+  <Include file="lib\DeliCrowdControl\load.xml"/>
 
   <!-- Custom unit frame components -->
   <Include file="classes\CastHistoryTemplates.xml"/>
