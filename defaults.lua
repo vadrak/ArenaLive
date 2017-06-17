@@ -102,6 +102,17 @@ ArenaLive.defaults = {
           width = 64,
           height = 64,
         },
+        ArenaLiveCrowdControlIcon = {
+          enabled = true,
+          anchor = {
+            relativeTo = "ClassIcon",
+            point = "CENTER",
+            relativePoint = "CENTER",
+            x = 0,
+            y = 0,
+          },
+          size = 64,
+        },
         BuffFrame = {
           enabled = true,
           anchor = {
@@ -261,7 +272,7 @@ ArenaLive.defaults = {
             relativeTo = "UnitFrame",
             point = "BOTTOMRIGHT",
             relativePoint = "BOTTOMLEFT",
-            x = -2,
+            x = -4,
             y = 28,
           },
           width = 72,
@@ -269,6 +280,17 @@ ArenaLive.defaults = {
           texture = "Interface\\AddOns\\ArenaLive\\textures\\StatusBar",
           font = "GameFontNormalSmall",
           hideTradeSkills = true,
+        },
+        ArenaLiveCrowdControlIcon = {
+          enabled = true,
+          anchor = {
+            relativeTo = "ClassIcon",
+            point = "CENTER",
+            relativePoint = "CENTER",
+            x = 0,
+            y = 0,
+          },
+          size = 64,
         },
         NameText = {
           colorMode = DeliUnitFrames.classes.NameText.ColorModes.NONE,

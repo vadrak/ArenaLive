@@ -120,6 +120,7 @@ function ArenaLive:onAddonLoaded()
   self.CastBar = DeliUnitFrames.classes.CastBar:new(ufm,
     "ArenaLiveCastBarTemplate");
   self.CastHistory = DeliUnitFrames.classes.ArenaLiveCastHistory:new(ufm);
+  self.CCIcon = DeliUnitFrames.classes.ArenaLiveCrowdControlIcon:new(ufm);
   self.NameText = DeliUnitFrames.classes.NameText:new(ufm);
 
   for i = 1, self.MAX_PLAYERS, 1 do
@@ -232,6 +233,7 @@ function ArenaLive:createUnitFrame(id, side)
   self.UnitFrameManager:addFrame(frame);
 
   self.ClassIcon:addToFrame(frame);
+  self.CCIcon:addToFrame(frame);
   self.HealthBar:addToFrame(frame);
   self.PowerBar:addToFrame(frame);
   self.BuffFrame:addToFrame(frame);
