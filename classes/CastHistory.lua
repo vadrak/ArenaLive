@@ -4,7 +4,7 @@
   * TODO: Automatically update version number on commit.
 ]]
 local addonName, L = ...;
-local version = 20170615;
+local version = 20170617;
 local CastHistory = DeliUnitFrames:getClass("ArenaLiveCastHistory");
 if (CastHistory and CastHistory.version >= version) then
   -- A more recent version has been loaded already.
