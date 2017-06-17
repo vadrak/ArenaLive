@@ -315,7 +315,7 @@ function castIterator(casts, lastID)
     return nil;
   end
 
-  return id, cast.spellID, cast.texture, cast.timeCast;
+  return id, cast.spellID, cast.texture, cast.time;
 end
 
 function fadeAnimationOnFinish(animGroup, requested)
