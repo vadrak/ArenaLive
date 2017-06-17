@@ -4,7 +4,7 @@
   * TODO: Automatically update version number on commit.
 ]]
 local addonName, L = ...;
-local version = 20170609;
+local version = 20170615;
 local CastHistory = DeliUnitFrames:getClass("ArenaLiveCastHistory");
 if (CastHistory and CastHistory.version >= version) then
   -- A more recent version has been loaded already.
@@ -116,8 +116,8 @@ end
 ]]
 function CastHistory:updateAppearance(unitFrame)
   self:getSuper().updateAppearance(self, unitFrame);
-  local history = self:getUIElement(unitFrame);
 
+  local history = self:getUIElement(unitFrame);
   local settings = self:getSettings(unitFrame);
   if (settings.direction == CastHistory.Directions.UPWARDS
     or CastHistory.Directions.DOWNWARDS) then
@@ -131,7 +131,7 @@ function CastHistory:updateAppearance(unitFrame)
   local prefix = history:GetName();
   for i = 1, settings.numIcons, 1 do
     local icon = history.icons[i];
-    if (not history.icons[i]) then
+    if (not icon) then
       icon = CreateFrame("Button", prefix .. "Button" .. i,
         history, "ArenaLiveCastHistoryIconTemplate");
 
@@ -187,10 +187,10 @@ function CastHistory:reset(unitFrame)
   if (not history) then
     return;
   end
-
   for i = 1, #history.icons, 1 do
-    history.icons[i].fadeOutAnim:Stop();
-    history.icons[i]:Hide();
+    local icon = history.icons[i];
+    icon.fadeOutAnim:Stop();
+    icon:Hide();
   end
 end
 
@@ -256,6 +256,7 @@ function CastHistory:addCast(unit, spellID)
 
   entry.writeIndex = (entry.writeIndex + 1) % 10;
 end
+
 --[[**
   * Creates and returns unit's cast history cache entry in cache.
   * If there already exists a cache entry for the given unit, the
@@ -278,10 +279,9 @@ function newCacheEntry(cache, unit)
 end
 
 --[[**
-  * Stateless iterator function that iterates over all entries in
-  * casts, ordered in descending order by the time they were cast,
-  * that is, the youngest cast is returned first and the oldest cast
-  * is returned last.
+  * Iterates all entries in casts, ordered in descending order by the
+  * time they were cast, that is, the youngest cast is returned first
+  * and the oldest cast is returned last.
   *
   * @param casts (table) a cast history cache entry of a specific 
   * player.
