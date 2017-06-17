@@ -14,7 +14,7 @@ CastHistory = DeliUnitFrames:newClass("ArenaLiveCastHistory",
   "AbstractScriptComponent");
 
 local MAX_CACHE_SIZE = 10;
-local newCacheEntry, castIterator, fadeAnimationOnFinish; -- private functions
+local newCacheEntry, resetCacheEntry, castIterator, fadeAnimationOnFinish; -- private functions
 CastHistory.version = version;
 CastHistory.Directions = { -- Enum for directions
   UPWARDS = 1,
@@ -43,6 +43,9 @@ function CastHistory:init(manager)
 
   self.cache = {};
   self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED");
+  self:RegisterEvent("UNIT_NAME_UPDATE");
+  self:RegisterEvent("PLAYER_TARGET_CHANGED");
+  self:RegisterEvent("PLAYER_FOCUS_CHANGED");
   self:SetScript("OnEvent");
 end
 
@@ -219,7 +222,18 @@ end
 ]]
 function CastHistory:OnEvent(event, ...)
   local unit, _, _, _, spellID = ...;
-  self:addCast(unit, spellID);
+  if (event == "UNIT_SPELLCAST_SUCCEEDED") then
+    self:addCast(unit, spellID);
+  else
+    if (event == "PLAYER_TARGET_CHANGED") then
+      unit = "target";
+    elseif (event == "PLAYER_FOCUS_CHANGED") then
+      unit = "focus";
+    end
+
+    resetCacheEntry(self.cache, unit);
+  end
+
   for unitFrame in self.manager:getUnitIterator(unit) do
     self:update(unitFrame);
   end
@@ -254,7 +268,7 @@ function CastHistory:addCast(unit, spellID)
   spell.texture = texture;
   spell.time = GetTime();
 
-  entry.writeIndex = (entry.writeIndex + 1) % 10;
+  entry.writeIndex = (entry.writeIndex + 1) % MAX_CACHE_SIZE;
 end
 
 --[[**
@@ -276,6 +290,32 @@ function newCacheEntry(cache, unit)
   end
 
   return cache[unit];
+end
+
+--[[**
+  * Resets unit's cache entry in cache, removing all spell data from
+  * the entry's sub tables.
+  *
+  * @param cache (table) the cache table of the affected CastHistory
+  * object.
+  * @param unit (string) unit id of the player who's cache data is
+  * going to be reset.
+]]
+function resetCacheEntry(cache, unit)
+  local ent = cache[unit];
+  if (not ent) then
+    return;
+  end
+
+  for i = 1, MAX_CACHE_SIZE, 1 do
+    local spell = ent[i];
+    if (spell) then
+      spell.ID = nil;
+      spell.texture = nil;
+      spell.time = nil;
+    end
+  end
+  ent.writeIndex = 0;
 end
 
 --[[**
@@ -310,12 +350,12 @@ function castIterator(casts, lastID)
     index = MAX_CACHE_SIZE + index;
   end
 
-  local cast = casts[index];
-  if (not cast) then
+  local spell = casts[index];
+  if (not spell or not spell.ID) then
     return nil;
   end
 
-  return id, cast.spellID, cast.texture, cast.time;
+  return id, spell.ID, spell.texture, spell.time;
 end
 
 function fadeAnimationOnFinish(animGroup, requested)
