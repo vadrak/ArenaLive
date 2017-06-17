@@ -310,15 +310,12 @@ function castIterator(casts, lastID)
     index = MAX_CACHE_SIZE + index;
   end
 
-  if (not casts[index]) then
+  local cast = casts[index];
+  if (not cast) then
     return nil;
   end
 
-  local spellID = casts[index].ID;
-  local texture = casts[index].texture;
-  local timeCast = casts[index].time;
-
-  return id, spellID, texture, timeCast;
+  return id, cast.spellID, cast.texture, cast.timeCast;
 end
 
 function fadeAnimationOnFinish(animGroup, requested)
