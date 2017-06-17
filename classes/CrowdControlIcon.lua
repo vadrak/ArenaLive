@@ -60,7 +60,7 @@ end
   * Updates unitFrame's crowd control icon to display the players
   *
   * @param unitFrame (AbstractUnitFrame) the unit frame that's crowd
-  * control icon is going to be reset.
+  * control icon is going to be updated.
 ]]
 function CCIcon.update(self, unitFrame)
   local icon = self:getUIElement(unitFrame);
@@ -97,7 +97,7 @@ end
   * current saved variable settings.
   *
   * @param unitFrame (AbstractUnitFrame) the unit frame that's crowd
-  * control icon is going to be updated.
+  * control icon's appearance is going to be updated.
 ]]
 function CCIcon.updateAppearance(self, unitFrame)
   local icon = self:getUIElement(unitFrame);
