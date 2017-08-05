@@ -67,8 +67,7 @@ end
 
 --[[
   * ArenaLive's unit frame OnEvent script callback. We use this to
-  * reduce a unit frame's alpha, if it is not the current target of
-  * the spectator.
+  * reduce a unit frame's alpha, if it is not the spectator's target.
 ]]
 function onEvent(unitFrame, event, ...)
   if (event == "PLAYER_TARGET_CHANGED") then
