@@ -3,7 +3,7 @@ local UnitFrame = DeliUnitFrames:newClass("ArenaLiveUnitFrame",
 ArenaLive.UnitFrame = UnitFrame;
 
 local onEvent; -- private functions
-
+local FRAME_Y_OFFSET = -96;
 --[[**
   * @Override
   * Initializes this ArenaLiveUnitFrame object.
@@ -62,7 +62,7 @@ function UnitFrame:updateAppearance()
   else
     relativeTo = ArenaLive.rightFrames[self.id - 1].frame;
   end
-  self.frame:SetPoint("TOPLEFT", relativeTo, "BOTTOMLEFT", 0, -64);
+  self.frame:SetPoint("TOPLEFT", relativeTo, "BOTTOMLEFT", 0, FRAME_Y_OFFSET);
 end
 
 --[[
