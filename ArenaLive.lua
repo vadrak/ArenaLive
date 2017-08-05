@@ -43,7 +43,6 @@ function ArenaLive:init()
   self:RegisterEvent("ADDON_LOADED");
   self:RegisterEvent("UPDATE_BATTLEFIELD_STATUS");
   self:RegisterEvent("COMMENTATOR_PLAYER_UPDATE");
-
   self.timeFrame:init();
   ArenaLiveHideUIButton:init();
 end
@@ -67,7 +66,8 @@ end
 function ArenaLive:onEvent(event, ...)
   local arg1 = ...;
   if (event == "ADDON_LOADED" and arg1 == addonName) then
-    self:onAddonLoaded();
+      self:onAddonLoaded();
+      DisableAddOn("Blizzard_Commentator");
   elseif (event == "COMMENTATOR_PLAYER_UPDATE") then
     --[[
       * This event does not mean that all relevant player information
