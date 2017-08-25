@@ -39,6 +39,7 @@ assert(DeliUnitFrames, "ArenaLive requires DeliUnitFrames.");
   * necessary events and creating required class instances.
 ]]
 function ArenaLive:init()
+  DisableAddOn("Blizzard_Commentator");
   self:SetScript("OnEvent", self.onEvent);
   self:RegisterEvent("ADDON_LOADED");
   self:RegisterEvent("UPDATE_BATTLEFIELD_STATUS");
@@ -66,8 +67,7 @@ end
 function ArenaLive:onEvent(event, ...)
   local arg1 = ...;
   if (event == "ADDON_LOADED" and arg1 == addonName) then
-      self:onAddonLoaded();
-      DisableAddOn("Blizzard_Commentator");
+    self:onAddonLoaded();
   elseif (event == "COMMENTATOR_PLAYER_UPDATE") then
     --[[
       * This event does not mean that all relevant player information
