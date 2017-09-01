@@ -44,6 +44,7 @@ ArenaLive.defaults = {
           height = 38,
           texture = "Interface\\AddOns\\ArenaLive\\textures\\StatusBar",
           colorMode = DeliUnitFrames.classes.HealthBar.ColorModes.CLASS,
+          showAbsorbs = true,
         },
         PowerBar = {
           enabled = true,
@@ -191,6 +192,7 @@ ArenaLive.defaults = {
           height = 38,
           texture = "Interface\\AddOns\\ArenaLive\\textures\\StatusBar",
           colorMode = DeliUnitFrames.classes.HealthBar.ColorModes.CLASS,
+          showAbsorbs = true,
         },
         PowerBar = {
           enabled = true,
