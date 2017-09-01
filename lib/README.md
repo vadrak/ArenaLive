@@ -2,7 +2,6 @@
 In the actual release build, this directory contains all libraries that ArenaLive depends on.
 
 ## List of Libraries
-These are the libraries which ArenaLive depends on.
 ```
 DeliCrowdControl          Stores crowd control information per unit.
 
