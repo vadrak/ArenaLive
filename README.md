@@ -4,6 +4,8 @@ ArenaLive is a LUA based spectator mode user interface for World of Warcraft are
 ## Install
 Put all files from the repository into a directory called "ArenaLive" and move that directory into your Word of Warcraft installation's AddOn folder (&lt;WOW-Directory&gt;/Interface/AddOns).
 
+After that download all the libraries listed in `/lib`'s README.md and move them into the addon's `lib` directory.
+
 ## Usage
 After logging in on one of your characters, type "/alive" into your chat frame's edit box and hit enter. An user interface will appear, which lets you queue two players from your Battle.net friend list against each other.
 
