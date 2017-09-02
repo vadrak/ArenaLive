@@ -8,9 +8,9 @@
   <Include file="lib\DeliCrowdControl\load.xml"/>
 
   <!-- Custom unit frame components -->
-  <Include file="classes\CastHistoryTemplates.xml"/>
-  <Include file="classes\CrowdControlIconTemplate.xml"/>
-  <Script file="classes\CrowdControlIcon.lua" />
+  <Include file="components\CastHistoryTemplates.xml"/>
+  <Include file="components\CrowdControlIconTemplate.xml"/>
+  <Script file="components\CrowdControlIcon.lua" />
   <Include file="Fonts.xml" />
   <Include file="ArenaLive.xml" />
   <Include file="HideUIButton.xml"/>
